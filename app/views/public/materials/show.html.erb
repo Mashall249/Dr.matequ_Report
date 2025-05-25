@@ -1,2 +1,8 @@
-<h1>Public::Materials#show</h1>
-<p>Find me in app/views/public/materials/show.html.erb</p>
+<h1>詳細ページ</h1>
+
+<%= image_tag @material.get_image, size: '200x200' %>
+<p><%= @material.name %></p>
+<p>特徴</p>
+<p><%= @material.body %></p>
+<p>URL</p>
+<%= Rinku.auto_link(@material.url, :all, 'target="_blank"').html_safe %>

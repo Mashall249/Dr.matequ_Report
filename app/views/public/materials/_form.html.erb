@@ -1,0 +1,35 @@
+<%= form_with model: material, local: true do |f| %>
+  <div class = "form-group">
+    < f.label : "画像" %>
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
+
+  <div class = "form-group">
+    < f.label : "製品名" %>
+    <%= f.text_field :name, placeholder: "製品名" %>
+  </div>
+
+  <div class = "form-group">
+    < f.label : "特徴" %>
+    <%= f.text_area :body, placeholder: "ここに特徴を記載してください" %>
+  </div>
+
+  <div class = "form-group">
+    < f.label : "URL" %>
+    <%= f.text_area :url, placeholder: "ここに製品のURLを記載してください" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :ジャンル %>
+    <%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--選択してください--" %>
+  </div>
+
+  <% if current_user.admin? %>
+    <%= f.radio_button :is_delete, true, checked: true %>
+    <%= f.label :is_delete, "承認待ち" %>
+    <%= f.radio_button :is_delete, false %>
+    <%= f.label :is_delete, "承認済み" %>
+  <% end %>
+
+  <%= f.submit "新規登録", class:"btn btn-success" %>
+<% end %>

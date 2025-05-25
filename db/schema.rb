@@ -42,17 +42,17 @@ ActiveRecord::Schema.define(version: 2025_05_24_104110) do
   end
 
   create_table "genres", force: :cascade do |t|
-    t.string "genre_name", null: false
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "materials", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "material_name", null: false
+    t.string "name", null: false
     t.text "body", null: false
     t.string "url", null: false
-    t.boolean "is_status", null: false
+    t.boolean "is_deleted", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2025_05_24_104110) do
     t.string "name", null: false
     t.string "nickname", null: false
     t.string "clinical_department", null: false
-    t.boolean "is_user_status", null: false
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

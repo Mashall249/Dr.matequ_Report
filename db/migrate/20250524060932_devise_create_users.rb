@@ -35,7 +35,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :name, null: false
       t.string :nickname, null: false
       t.string :clinical_department, null: false
-      t.boolean :is_user_status, null: false
+      t.boolean :is_active, null: false, default: true
       t.timestamps null: false
     end
 
