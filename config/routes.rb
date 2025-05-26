@@ -1,18 +1,19 @@
 Rails.application.routes.draw do
   #ユーザー用デバイス
   devise_for :users,skip: [:passwords], controllers: {
-  registrations: "public/registrations",
+  registrations: 'public/registrations',
   sessions: 'public/sessions'
 }
 
   #管理者用デバイス
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
-  sessions: "admin/sessions"
+  sessions: 'admin/sessions'
 }
 
-  root to: "public/homes#top"
+  root to: 'public/homes#top'
   get '/about' => 'public/homes#about', as: 'about'
 
+  #ユーザー用ルート
   scope module: :public do
     get '/users/mypage' => 'users#mypage'
     get '/users/information/edit' => 'users#edit'
@@ -20,11 +21,15 @@ Rails.application.routes.draw do
     get '/users/check' => 'users#check'
     patch '/users/withdraw' => 'users#withdraw'
 
-    resources :materials
-    resources :comments, only: [:create, :destroy]
-    resources :favorites, only: [:create, :destroy]
+    get '/search' => 'searches#search'
+
+    resources :materials do
+      resources :comments, only: [:new, :create, :destroy]
+      resources :favorites, only: [:create, :destroy]
+    end
   end
 
+  #管理者用ルート
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]

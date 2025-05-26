@@ -1,0 +1,7 @@
+<%= form_with model: [@material, @comment] local: true do |f| %>
+  <%= f.label: "良いポイント" %>
+  <f.text_area :good_comment, rows: '3', placeholder: "良かった、もしくは勧めたいところは？" %>
+  <%= f.label: "使いにくいポイント" %>
+  <f.text_area :good_comment, rows: '3', placeholder: "使いにくい、もしくは改善してほしいところは？" %>
+  <f.submit "コメントする" %>
+<% end %>
