@@ -1,4 +1,6 @@
 class Public::MaterialsController < ApplicationController
+  before_action :authenticate_user! only: [:new, :create, :edit, :update, :destroy]
+
   def new
     @material = Material.new
   end

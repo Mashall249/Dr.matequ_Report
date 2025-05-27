@@ -15,11 +15,10 @@ class Public::CommentsController < ApplicationController
   def destroy
     Comment.find(params[:id]).destroy
     redirect_to material_path(params[material_id])
-
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:good_comment, :bad_comment)
+    params.require(:comment).permit(:good_comment, :bad_comment, :star)
 end

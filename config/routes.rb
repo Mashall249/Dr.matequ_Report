@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:new, :create, :destroy]
       resources :favorite, only: [:create, :destroy]
     end
+    resources :genres, only: [:show]
   end
 
   #管理者用ルート

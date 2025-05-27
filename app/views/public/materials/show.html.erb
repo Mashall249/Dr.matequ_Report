@@ -23,12 +23,32 @@
 <p>URL</p>
 <%= Rinku.auto_link(@material.url, :all, 'target="_blank"').html_safe %>
 
-<% link_to "コメント/レビューする", new_material_comment_path %>
+<% if user_signed_in? %>
+  <% link_to "コメント/レビューする", new_material_comment_path %>
+<% end %>
 
 <p><i class="fa-solid fa-comment"></i>：<%= @material.comments.count %>件</p>
 
+<!-- コメント・レビュー一覧 -->
 <% @material.comments.each do |comment| %>
   <%= comment.user.nickname %><br>
+  <div id="star_<%= comment.id %>"></div>
+  <script>
+    $(document).on('turbolinks:load', function() {
+      let elem = document.querySelector('#star_<%= comment.id %>');
+      if (elem == null) return;
+      
+      elem.innerHTML = "";
+      let opt = {  
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        score: "<%= comment.star %>",
+        readOnly: true,
+      };
+      raty(elem, opt);
+    });
+  </script>
   <p>良いポイント</p><%= comment.good_comment %>
   <p>使いにくいポイント</p><%= comment.bad_comment %>
   <% if comment.user == current_user %>
