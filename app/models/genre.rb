@@ -1,5 +1,5 @@
 class Genre < ApplicationRecord
   has_many :materials, dependent: :destroy
 
-  validates :genre_name, presence: true
+  validates :name, presence: true
 end

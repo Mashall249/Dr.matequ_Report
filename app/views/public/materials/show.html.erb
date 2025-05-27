@@ -1,7 +1,23 @@
 <h1>詳細ページ</h1>
 
 <%= image_tag @material.get_image, size: '200x200' %>
-<p><%= @material.name %></p>
+<h3><%= @material.name %></h3>
+
+<!-- 使用 (いいね)機能 -->
+<if @material.favorited_by?(current_user) %>
+  <p>
+    <%= link_to material_favorite_path(@material),method: :delete do %>
+      <i class="fa-regular fa-circle-check"></i>
+    <% end %>
+  </p>
+<% else %>
+    <p>
+    <%= link_to material_favorite_index_path(@material),method: :post do %>
+      <i class="fa-regular fa-circle-check"></i>
+    <% end %>
+  </p>
+<% end %>
+
 <p>特徴</p>
 <p><%= @material.body %></p>
 <p>URL</p>
@@ -9,7 +25,7 @@
 
 <% link_to "コメント/レビューする", new_material_comment_path %>
 
-<p>コメント件数：<%= @material.comments.count %></p>
+<p><i class="fa-solid fa-comment"></i>：<%= @material.comments.count %>件</p>
 
 <% @material.comments.each do |comment| %>
   <%= comment.user.nickname %><br>

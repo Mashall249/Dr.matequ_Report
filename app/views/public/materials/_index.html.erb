@@ -6,7 +6,10 @@
         <%=link_to material.name, material_path %>
         <%= material.genre.name %>
       </td>
-      <td><!-- レビュー・コメント件数・いいね件数記載場所 --></td>
+      <td><!-- レビュー・コメント件数・いいね件数記載場所 -->
+        <i class="fa-regular fa-circle-check"></i>：<%= material.favorites.count %>件
+        <i class="fa-solid fa-comment"></i>：<%= material.comments.count %>件
+      </td>
     </tr>
   <% end %>
 </table>

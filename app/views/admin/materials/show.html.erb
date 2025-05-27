@@ -6,3 +6,13 @@
 <p><%= @material.body %></p>
 <p>URL</p>
 <%= Rinku.auto_link(@material.url, :all, 'target="_blank"').html_safe %>
+
+<p><i class="fa-regular fa-circle-check"></i>：<%= material.favorites.count %>件</p>
+<p><i class="fa-solid fa-comment"></i>：<%= @material.comments.count %>件</p>
+
+<% @material.comments.each do |comment| %>
+  <%= comment.user.nickname %><br>
+  <p>良いポイント</p><%= comment.good_comment %>
+  <p>使いにくいポイント</p><%= comment.bad_comment %>
+  <%= link_to "削除する", material_comment_path(comment.material, comment), method: :delete %>
+<% end %>

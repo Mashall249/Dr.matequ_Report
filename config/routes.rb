@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
     resources :materials do
       resources :comments, only: [:new, :create, :destroy]
-      resources :favorites, only: [:create, :destroy]
+      resources :favorite, only: [:create, :destroy]
     end
   end
 

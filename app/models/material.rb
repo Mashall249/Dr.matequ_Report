@@ -6,7 +6,7 @@ class Material < ApplicationRecord
 
   has_one_attached :profile_image
 
-  validates :material_name, presence: true
+  validates :name, presence: true
   validates :body, presence: true, length: {minimum: 10}
   validates :url, presence: true
 
@@ -21,6 +21,11 @@ class Material < ApplicationRecord
     else
       Material.where('name LIKE ?', '%' + content + '%')
     end
+  end
+
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
 
   def get_profile_image
     (profile_image.attached?) ? profile_image : "no_image.jpg"
