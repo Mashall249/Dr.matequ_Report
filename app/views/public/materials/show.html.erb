@@ -1,18 +1,18 @@
 <h1>詳細ページ</h1>
 
-<%= image_tag @material.get_image, size: '200x200' %>
+<%= image_tag @material.get_image(200, 200) %>
 <h3><%= @material.name %></h3>
 
 <!-- 使用 (いいね)機能 -->
-<if @material.favorited_by?(current_user) %>
+<% if @material.favorited_by?(current_user) %>
   <p>
-    <%= link_to material_favorite_path(@material),method: :delete do %>
+    <%= link_to material_favorite_path(@material), method: :delete do %>
       <i class="fa-regular fa-circle-check"></i>
     <% end %>
   </p>
 <% else %>
-    <p>
-    <%= link_to material_favorite_index_path(@material),method: :post do %>
+  <p>
+    <%= link_to material_favorite_path(@material), method: :post do %>
       <i class="fa-regular fa-circle-check"></i>
     <% end %>
   </p>
@@ -24,7 +24,7 @@
 <%= Rinku.auto_link(@material.url, :all, 'target="_blank"').html_safe %>
 
 <% if user_signed_in? %>
-  <% link_to "コメント/レビューする", new_material_comment_path %>
+  <%= link_to "コメント/レビューする", new_material_comment_path(@material) %>
 <% end %>
 
 <p><i class="fa-solid fa-comment"></i>：<%= @material.comments.count %>件</p>

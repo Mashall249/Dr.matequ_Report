@@ -14,6 +14,7 @@ class Admin::GenresController < ApplicationController
     else
       @genres = Genre.all
       render :index
+    end
   end
 
   def edit

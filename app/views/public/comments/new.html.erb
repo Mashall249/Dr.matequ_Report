@@ -1,11 +1,11 @@
-<%= form_with model: [@material, @comment] local: true do |f| %>
+<%= form_with model: [@material, @comment], local: true do |f| %>
   <div class="form-group">
-    <%= f.label: "良いポイント" %>
-    <f.text_area :good_comment, rows: '3', placeholder: "良かった、もしくは勧めたいところは？" %>
+    <%= f.label "良いポイント" %>
+    <%= f.text_area :good_comment, rows: '3', placeholder: "良かった、もしくは勧めたいところは？" %>
   </div>
   <div class="form-group">
-  <%= f.label: "使いにくいポイント" %>
-  <f.text_area :good_comment, rows: '3', placeholder: "使いにくい、もしくは改善してほしいところは？" %>
+    <%= f.label "使いにくいポイント" %>
+    <%= f.text_area :bad_comment, rows: '3', placeholder: "使いにくい、もしくは改善してほしいところは？" %>
   </div>
 
   <div class="form-group" id='star'>
@@ -23,12 +23,12 @@
         starOn: "<%= asset_path('star-on.png') %>",
         starOff: "<%= asset_path('star-off.png') %>",
         starHalf: "<%= asset_path('star-half.png') %>",
-        scoreName: '@comment[star]',
+        scoreName: 'comment[star]',
       };
       raty(elem, opt);
     });
   </script>
 
-  <f.submit "コメント・評価する" %>
+  <%= f.submit "コメント・評価する" %>
 
 <% end %>

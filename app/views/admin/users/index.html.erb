@@ -11,14 +11,15 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= user.id %></td>
-      <td><%= user.name %></td>
+      <td><%= link_to user.name, edit_admin_user_path(user) %></td>
       <td><%= user.email %></td>
       <td>
-        <% if customer.is_active %>
+        <% if user.is_active %>
           <span class = "text-success">有効</td>
         <% else %>
           <span class = "text-secondary">退会</td>
         <% end %>
       </td>
     </tr>
+  <% end %>
 </table>

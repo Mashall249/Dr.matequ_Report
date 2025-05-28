@@ -17,7 +17,7 @@
           <% if user_signed_in? %>
             <li class="mx-3"><%= link_to "マイページ", users_mypage_path,class: "nav-item text-light" %></li>
             <li class="mx-3"><%= link_to "機器/材料一覧", materials_path,class: "nav-item text-light" %></li>
-            <li class="mx-3"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete,class: "nav-item text-light" %></li>
+            <li class="mx-3"><%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: "nav-item text-light" %></li>
 
           <!-- 管理者がログインしている時 -->
           <% elsif admin_signed_in? %>
@@ -30,7 +30,7 @@
           <% else %>
             <li class="mx-3"><%= link_to "About", about_path,class: "nav-item text-light" %></li>
             <li class="mx-3"><%= link_to "機器/材料一覧", materials_path,class: "nav-item text-light" %></li>
-            <li class="mx-3"><%= link_to "新規登録", user_registration_path,class: "nav-item text-light" %></li>
+            <li class="mx-3"><%= link_to "新規登録", new_user_registration_path,class: "nav-item text-light" %></li>
             <li class="mx-3"><%= link_to "ログイン", new_user_session_path,class: "nav-item text-light" %></li>
           <% end %>
 
