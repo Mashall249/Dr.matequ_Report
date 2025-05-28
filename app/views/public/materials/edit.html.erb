@@ -2,4 +2,4 @@
 
 <%= render 'public/materials/form', material: @material %>
 
-<%= link_to "削除", destroy_material_path(@material), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+<%= link_to "削除", material_path(@material), method: :delete, "data-confirm" => "本当に削除しますか？" %>

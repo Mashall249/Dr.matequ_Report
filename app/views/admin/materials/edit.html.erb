@@ -32,7 +32,7 @@
     <%= f.label :is_delete, "承認済み" %>
 
   <%= f.submit "新規登録", class:"btn btn-success" %>
-  <%= link_to "削除", destroy_material_path(@material), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <%= link_to "削除", admin_material_path(@material), method: :delete, "data-confirm" => "本当に削除しますか？" %>
 <% end %>
 
 

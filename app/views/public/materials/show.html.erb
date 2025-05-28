@@ -3,19 +3,23 @@
 <%= image_tag @material.get_image(200, 200) %>
 <h3><%= @material.name %></h3>
 
+<%= link_to "編集する", edit_material_path(@material) %>
+
 <!-- 使用 (いいね)機能 -->
-<% if @material.favorited_by?(current_user) %>
-  <p>
-    <%= link_to material_favorite_path(@material), method: :delete do %>
-      <i class="fa-regular fa-circle-check"></i>
-    <% end %>
-  </p>
-<% else %>
-  <p>
-    <%= link_to material_favorite_path(@material), method: :post do %>
-      <i class="fa-regular fa-circle-check"></i>
-    <% end %>
-  </p>
+<% if user_signed_in? %>
+  <% if @material.favorited_by?(current_user) %>
+    <p>
+      <%= link_to material_favorite_path(@material), method: :delete do %>
+        <i class="fa-regular fa-circle-check"></i>
+      <% end %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to material_favorite_path(@material), method: :post do %>
+        <i class="fa-regular fa-circle-check"></i>
+      <% end %>
+    </p>
+  <% end %>
 <% end %>
 
 <p>特徴</p>
@@ -27,6 +31,7 @@
   <%= link_to "コメント/レビューする", new_material_comment_path(@material) %>
 <% end %>
 
+<p><i class="fa-regular fa-circle-check"></i>：<%= @material.favorites.count %>件</p>
 <p><i class="fa-solid fa-comment"></i>：<%= @material.comments.count %>件</p>
 
 <!-- コメント・レビュー一覧 -->

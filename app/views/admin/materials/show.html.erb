@@ -1,17 +1,18 @@
 <h1>詳細ページ</h1>
 
-<%= image_tag @material.get_image, size: '200x200' %>
+<%= image_tag @material.get_image(200, 200) %>
 <p><%= @material.name %></p>
 <p>特徴</p>
 <p><%= @material.body %></p>
 <p>URL</p>
 <%= Rinku.auto_link(@material.url, :all, 'target="_blank"').html_safe %>
 
-<p><i class="fa-regular fa-circle-check"></i>：<%= material.favorites.count %>件</p>
+<p><i class="fa-regular fa-circle-check"></i>：<%= @material.favorites.count %>件</p>
 <p><i class="fa-solid fa-comment"></i>：<%= @material.comments.count %>件</p>
 
 <% @material.comments.each do |comment| %>
   <%= comment.user.nickname %><br>
+
   <div id="star_<%= comment.id %>"></div>
   <script>
     $(document).on('turbolinks:load', function() {
@@ -29,7 +30,8 @@
       raty(elem, opt);
     });
   </script>
+
   <p>良いポイント</p><%= comment.good_comment %>
   <p>使いにくいポイント</p><%= comment.bad_comment %>
-  <%= link_to "削除する", material_comment_path(comment.material, comment), method: :delete %>
+  <%= link_to "削除する", admin_material_comment_path(comment.material, comment), method: :delete %>
 <% end %>

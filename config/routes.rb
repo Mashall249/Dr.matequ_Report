@@ -34,8 +34,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
-    resources :materials, only: [:index, :show, :edit, :update, :destroy]
-    resources :comments, only: [:destroy]
+    resources :materials, only: [:index, :show, :edit, :update, :destroy] do
+      resources :comments, only: [:destroy]
+    end
   end
 
 end
