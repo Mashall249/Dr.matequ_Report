@@ -20,6 +20,8 @@ window.raty = function(elem,opt) {
   return raty;
 }
 
+import '../preview.js'
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
