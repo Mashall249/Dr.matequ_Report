@@ -23,5 +23,3 @@ window.raty = function(elem,opt) {
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-require('./preview')
