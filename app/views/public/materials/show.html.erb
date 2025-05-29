@@ -33,7 +33,8 @@
 
 <p><i class="fa-regular fa-circle-check"></i>：<%= @material.favorites.count %>件</p>
 <p><i class="fa-solid fa-comment"></i>：<%= @material.comments.count %>件</p>
-
+<div class="average-star" data-score=<%= material.comments.average(:star) %>></div>
+<%= material.comments.average(:star).to_f.round(1) %>
 <!-- コメント・レビュー一覧 -->
 <% @material.comments.each do |comment| %>
   <%= comment.user.nickname %><br>
