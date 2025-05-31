@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   def proper_clinical_department
     unless clinical_department.ends_with('科')
-      errors.add(:clinical_department, '最後に「科」をつけてください。')
+      errors.add(:clinical_department, '（診療科）は最後に「科」をつけてください。')
     end
   end
 end

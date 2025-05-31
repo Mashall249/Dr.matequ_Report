@@ -1,4 +1,6 @@
 class Public::MaterialsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit]
+
   def new
     @material = Material.new
   end
@@ -43,7 +45,7 @@ class Public::MaterialsController < ApplicationController
 
   private
    def material_params
-    params.require(:material).permit(:material_name, :body, :url, :is_deleted, :profile_image)
+    params.require(:material).permit(:name, :body, :url, :is_deleted, :image)
    end
 
 end
