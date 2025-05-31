@@ -1,13 +1,13 @@
 <% if user_signed_in? %>
   <% if material.favorited_by?(current_user) %>
     <p>
-      <%= link_to material_favorite_path(material), method: :delete, remote: true do %>
+      <%= link_to material_favorite_path(material), method: :delete, remote: true, class: "favorite-toggle", data: { material_id: material.id, action_type: "unfavorite" } do %>
         <i class="fa-regular fa-circle-check"></i>
       <% end %>
     </p>
   <% else %>
     <p>
-      <%= link_to material_favorite_path(material), method: :post, remote: true do %>
+      <%= link_to material_favorite_path(material), method: :post, remote: true, class: "favorite-toggle", data: { material_id: material.id, action_type: "favorite" } do %>
         <i class="fa-regular fa-circle-check"></i>
       <% end %>
     </p>

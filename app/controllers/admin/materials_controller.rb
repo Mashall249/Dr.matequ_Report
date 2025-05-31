@@ -26,6 +26,6 @@ class Admin::MaterialsController < ApplicationController
   private
 
   def material_params
-    params.reqire(:material).permit(:name, :body, :url, :is_deleted, :image, :genre_id)
+    params.require(:material).permit(:name, :body, :url, :is_deleted, :image, :genre_id)
   end
 end

@@ -20,7 +20,9 @@ window.raty = function(elem,opt) {
   return raty;
 }
 
-import '../preview.js'
+import '../preview.js';
+import './star.js';
+import './favorite.js';
 
 Rails.start()
 Turbolinks.start()

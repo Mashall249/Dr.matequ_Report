@@ -8,9 +8,19 @@
         <%=link_to material.name, admin_material_path(material) %>
         <%= material.genre.name %>
       </td>
-      <td><!-- レビュー・コメント件数・いいね件数記載場所 -->
+      <td>
         <i class="fa-regular fa-circle-check"></i>：<%= material.favorites.count %>件
         <i class="fa-solid fa-comment"></i>：<%= material.comments.count %>件
+      </td>
+      <td>
+        <% avg = material.comments.average(:star) %>
+        <% if avg.present? %>
+          <div class="avg-star-rating" data-score="<%= avg.to_f.round(1) %>"></div>
+          <%= avg.to_f.round(1) %>
+        <% else %>
+          <p>0.0</p>
+        <% end %>
+        <div class="avg-star-rating" id="star_<%= material.id %>" data-score="<%= avg.to_f.round(1) %>"></div>
       </td>
     </tr>
   <% end %>

@@ -2,16 +2,16 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!
 
   def mypage
-    @user = User.find(current_user.id)
+    @user = current_user
     @materials = @user.materials
   end
 
   def edit
-    @user = User.find(current_user.id)
+    @user = current_user
   end
 
   def update
-    @user = User.find(current_user.id)
+    @user = current_user
     if @user.update(user_params)
       redirect_to users_mypage_path, notice: "登録情報を更新しました！"
     else
@@ -20,7 +20,7 @@ class Public::UsersController < ApplicationController
   end
 
   def withdraw
-    @user = User.find(current_user.id)
+    @user = current_user
     @user.update(is_active: false)
     reset_session
     flash[:notice] = "退会処理を実行しました"

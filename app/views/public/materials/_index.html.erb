@@ -2,35 +2,26 @@
   <% materials.each do |material| %>
     <tr>
       <td><%= image_tag material.get_image(50, 50) %></td>
+
       <td>
         <%=link_to material.name, material_path(material) %>
         <%= material.genre.name %>
       </td>
+      
       <td><!-- コメント件数・いいね件数記載場所 -->
         <i class="fa-regular fa-circle-check"></i>：<%= material.favorites.count %>件
         <i class="fa-solid fa-comment"></i>：<%= material.comments.count %>件
+      </td>
 
-        <!-- レビュー平均値 -->
-        <div class="average-star" data-score=<%= material.comments.average(:star) %>></div>
-        <%= material.comments.average(:star).to_f.round(1) %>
-        
-        <div id="star_<%= material.id %>"></div>
-        <script>
-          $(document).on('turbolinks:load', function() {
-            let elem = document.querySelector('#star_<%= material.id %>');
-            if (elem == null) return;
-            
-            elem.innerHTML = "";
-            let opt = {  
-              starOn: "<%= asset_path('star-on.png') %>",
-              starOff: "<%= asset_path('star-off.png') %>",
-              starHalf: "<%= asset_path('star-half.png') %>",
-              score: "<%= material.comments.average(:star).to_f.round(1) %>",
-              readOnly: true,
-            };
-            raty(elem, opt);
-          });
-        </script>
+      <td><!-- レビュー平均値 nilチェックあり-->
+        <% avg = material.comments.average(:star) %>
+        <% if avg.present? %>
+          <div class="avg-star-rating" data-score="<%= avg.to_f.round(1) %>"></div>
+          <%= avg.to_f.round(1) %>
+        <% else %>
+          <p>0.0</p>
+        <% end %>
+        <div class="avg-star-rating" id="star_<%= material.id %>" data-score="<%= avg.to_f.round(1) %>"></div>
       </td>
     </tr>
   <% end %>
