@@ -1,0 +1,8 @@
+<h1>詳細ページ</h1>
+
+<%= image_tag @material.get_image(200, 200) %>
+<h3><%= @material.name %></h3>
+<p>特徴</p>
+<p><%= @material.body %></p>
+<p>URL</p>
+<%= Rinku.auto_link(@material.url, :all, 'target="_blank"').html_safe %>

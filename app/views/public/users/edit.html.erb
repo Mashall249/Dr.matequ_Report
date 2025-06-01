@@ -1,0 +1,30 @@
+<h1>ユーザー編集画面</h1>
+
+<%= form_with model: @user,url: users_information_path, local: true, method: :patch do |f| %>
+  <%= render "public/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label "名前" %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "表示名" %><br />
+    <%= f.text_field :nickname, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "診療科" %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label "メールアドレス" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "更新", class: "btn btn-success" %>
+    <%= link_to "退会する", users_check_path, class: "btn btn-danger"%>
+  </div>
+<% end %>

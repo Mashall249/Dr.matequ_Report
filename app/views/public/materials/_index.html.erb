@@ -1,0 +1,12 @@
+<table>
+  <% materials.each do |material| %>
+    <tr>
+      <td><%= image_tag material.get_image(50, 50) %></td>
+      <td>
+        <%=link_to material.name, material_path %>
+        <%= material.genre.name %>
+      </td>
+      <td><!-- レビュー・コメント件数・いいね件数記載場所 --></td>
+    </tr>
+  <% end %>
+</table>
