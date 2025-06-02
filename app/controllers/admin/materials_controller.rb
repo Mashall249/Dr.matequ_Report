@@ -20,10 +20,12 @@ class Admin::MaterialsController < ApplicationController
     else
       flash.now[:alert] = "エラーが発生しました"
       render :edit
+    end
   end
 
   private
 
   def material_params
-    params.reqire(:material).permit(:name, :body, :url, :profile_image, :is_deleted)
+    params.require(:material).permit(:name, :body, :url, :is_deleted, :image, :genre_id)
+  end
 end

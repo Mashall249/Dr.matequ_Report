@@ -21,6 +21,11 @@ class Material < ApplicationRecord
     else
       Material.where('name LIKE ?', '%' + content + '%')
     end
+  end
+
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
 
   def get_image(width, height)
     image.variant(resize: "#{width}x#{height}!").processed

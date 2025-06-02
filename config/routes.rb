@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   sessions: 'admin/sessions'
 }
 
-  root to: "homes#top"
+  root to: 'homes#top'
   get '/about' => 'homes#about', as: 'about'
 
   #ユーザー用ルート
@@ -25,16 +25,18 @@ Rails.application.routes.draw do
 
     resources :materials do
       resources :comments, only: [:new, :create, :destroy]
-      resources :favorites, only: [:create, :destroy]
+      resource :favorite, only: [:create, :destroy]
     end
+    resources :genres, only: [:show]
   end
 
   #管理者用ルート
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
-    resources :materials, only: [:index, :show, :edit, :update, :destroy]
-    resources :comments, only: [:destroy]
+    resources :materials, only: [:index, :show, :edit, :update, :destroy] do
+      resources :comments, only: [:destroy]
+    end
   end
 
 end

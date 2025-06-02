@@ -7,7 +7,7 @@ class Public::MaterialsController < ApplicationController
 
   def create
     @material = Material.new(material_params)
-    @material.user_id = current_user_id
+    @material.user_id = current_user.id
     if @material.save
       redirect_to material_path(@material), notice: "登録に成功しました！"
     else
@@ -21,7 +21,7 @@ class Public::MaterialsController < ApplicationController
   end
 
   def show
-    @materials = Material.find(params[:id])
+    @material = Material.find(params[:id])
   end
 
   def edit
@@ -45,7 +45,7 @@ class Public::MaterialsController < ApplicationController
 
   private
    def material_params
-    params.require(:material).permit(:name, :body, :url, :is_deleted, :image)
+    params.require(:material).permit(:name, :body, :url, :is_deleted, :image, :genre_id)
    end
 
 end

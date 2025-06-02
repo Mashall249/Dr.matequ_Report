@@ -1,0 +1,16 @@
+<h1>ジャンル検索 結果一覧</h1>
+
+<table>
+  <% @genre.materials.each do |material| %>
+    <tr>
+      <td><%= image_tag material.get_profile_image, size:'50x50' %></td>
+      <td>
+        <%=link_to material.name, material_path %>
+      </td>
+      <td><!-- レビュー・コメント件数・いいね件数記載場所 -->
+        <i class="fa-regular fa-circle-check"></i>：<%= material.favorites.count %>件
+        <i class="fa-solid fa-comment"></i>：<%= material.comments.count %>件
+      </td>
+    </tr>
+  <% end %>
+</table>
