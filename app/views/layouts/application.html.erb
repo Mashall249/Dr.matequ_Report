@@ -17,6 +17,11 @@
     <p class='text-success'><%= flash[:notice] %></p>
     <p class='text-danger'><%= flash[:alert] %></p>
 
+    <!-- 検索窓 -->
+    <div class="d-flex justify-content-center mb-2">
+      <%= render "public/searches/form" %>
+    </div>
+
     <%= yield %>
 
     <%= render 'layouts/footer' %>
