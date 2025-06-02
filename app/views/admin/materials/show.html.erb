@@ -7,31 +7,18 @@
 <p>URL</p>
 <%= Rinku.auto_link(@material.url, :all, 'target="_blank"').html_safe %>
 
+<%= link_to "編集する", edit_admin_material_path(@material) %>
+
 <p><i class="fa-regular fa-circle-check"></i>：<%= @material.favorites.count %>件</p>
 <p><i class="fa-solid fa-comment"></i>：<%= @material.comments.count %>件</p>
 
 <% @material.comments.each do |comment| %>
   <%= comment.user.nickname %><br>
 
-  <div id="star_<%= comment.id %>"></div>
-  <script>
-    $(document).on('turbolinks:load', function() {
-      let elem = document.querySelector('#star_<%= comment.id %>');
-      if (elem == null) return;
-      
-      elem.innerHTML = "";
-      let opt = {  
-        starOn: "<%= asset_path('star-on.png') %>",
-        starOff: "<%= asset_path('star-off.png') %>",
-        starHalf: "<%= asset_path('star-half.png') %>",
-        score: "<%= comment.star %>",
-        readOnly: true,
-      };
-      raty(elem, opt);
-    });
-  </script>
+  <div class="comment-star-rating" data-score="<%= comment.star %>"></div>
 
   <p>良いポイント</p><%= comment.good_comment %>
   <p>使いにくいポイント</p><%= comment.bad_comment %>
+
   <%= link_to "削除する", admin_material_comment_path(comment.material, comment), method: :delete %>
 <% end %>
