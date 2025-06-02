@@ -1,41 +1,57 @@
 <header>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg" style="background-color: #2E2930;">
     <div class="container-fluid">
-      <nav  class="navbar bg-body-tertiary">
-        <div  class="container">
-          <%= link_to root_path do %>
-            <%= image_tag "icon.png", size: '90x90' %>
-          <% end %>
-        </div>
-      </nav>
+      
+      <!-- ロゴ -->
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <%= image_tag "icon.png", size: '90x90' %>
+      <% end %>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="d-flex flex-column w-100">
-          <ul class="navbar-nav ml-auto mx-3 text-light">
+      <!-- ナビゲーションリンク -->
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav d-flex flex-row gap-3">
 
-          <!-- ユーザーーがログインしている時 -->
           <% if user_signed_in? %>
-            <li class="mx-3"><%= link_to "マイページ", users_mypage_path,class: "nav-item text-light" %></li>
-            <li class="mx-3"><%= link_to "機器/材料一覧", materials_path,class: "nav-item text-light" %></li>
-            <li class="mx-3"><%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: "nav-item text-light" %></li>
+            <li class="nav-item">
+              <%= link_to "マイページ", users_mypage_path, class: "nav-link text-light" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "機器/材料一覧", materials_path, class: "nav-link text-light" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link text-light" %>
+            </li>
 
-          <!-- 管理者がログインしている時 -->
           <% elsif admin_signed_in? %>
-            <li class="mx-3"><%= link_to "機器/材料一覧", admin_materials_path,class: "nav-item text-light" %></li>
-            <li class="mx-3"><%= link_to "ユーザー一覧", admin_users_path,class: "nav-item text-light" %></li>
-            <li class="mx-3"><%= link_to "ジャンル一覧", admin_genres_path,class: "nav-item text-light" %></li>
-            <li class="mx-3"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete,class: "nav-item text-light" %></li>
+            <li class="nav-item">
+              <%= link_to "機器/材料一覧", admin_materials_path, class: "nav-link text-light" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link text-light" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ジャンル一覧", admin_genres_path, class: "nav-link text-light" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-light" %>
+            </li>
 
-          <!-- ログインしていない時 -->
           <% else %>
-            <li class="mx-3"><%= link_to "About", about_path,class: "nav-item text-light" %></li>
-            <li class="mx-3"><%= link_to "機器/材料一覧", materials_path,class: "nav-item text-light" %></li>
-            <li class="mx-3"><%= link_to "新規登録", new_user_registration_path,class: "nav-item text-light" %></li>
-            <li class="mx-3"><%= link_to "ログイン", new_user_session_path,class: "nav-item text-light" %></li>
+            <li class="nav-item">
+              <%= link_to "About", about_path, class: "nav-link text-light" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "機器/材料一覧", materials_path, class: "nav-link text-light" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "新規登録", new_user_registration_path, class: "nav-link text-light" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログイン", new_user_session_path, class: "nav-link text-light" %>
+            </li>
           <% end %>
 
-          </ul>
-        </div>
+        </ul>
       </div>
     </div>
   </nav>

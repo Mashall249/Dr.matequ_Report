@@ -1,8 +1,12 @@
-<h1>Top</h1>
+<div class="container text-center mt-4">
+  <h1 class="mb-4">Top</h1>
 
-<div>
-  <p>新規ユーザー登録はこちらから</p>
-  <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary" %>
+<%= link_to "新規登録", new_user_registration_path, class: "top-register-btn btn btn-primary" %>
+
+  <section class="top-material-section py-5">
+    <div class="container">
+      <h2 class="text-white mb-4">新着投稿</h2>
+      <%= render 'public/materials/index', materials: @materials %>
+    </div>
+  </section>
 </div>
-
-<%= render 'public/materials/index', materials: @materials %>
