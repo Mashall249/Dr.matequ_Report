@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   sessions: 'admin/sessions'
 }
 
-  root to: 'public/homes#top'
-  get '/about' => 'public/homes#about', as: 'about'
+  root to: "homes#top"
+  get '/about' => 'homes#about', as: 'about'
 
   #ユーザー用ルート
   scope module: :public do

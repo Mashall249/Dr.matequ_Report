@@ -1,7 +1,7 @@
 <table>
   <% materials.each do |material| %>
     <tr>
-      <td><%= image_tag material.get_profile_image, size:'50x50' %></td>
+      <td><%= image_tag material.get_image(50, 50) %></td>
       <td>
         <%=link_to material.name, material_path %>
         <%= material.genre.name %>
