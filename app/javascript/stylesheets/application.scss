@@ -1,1 +1,9 @@
 @use '~bootstrap/scss/bootstrap';
+
+@import "header";
+@import "top";
+
+body.main-bg {
+  background-color: #2C3930;
+  color: white;
+}

@@ -1,0 +1,36 @@
+.top-hero-section {
+  background-color: #2E2930;
+  padding: 4rem 1rem;
+  text-align: center;
+
+  h1 {
+    font-weight: bold;
+  }
+
+  .btn {
+    font-size: 1.1rem;
+    padding: 0.75rem 2rem;
+  }
+}
+
+.top-register-btn {
+  position: fixed;
+  top: 120px; // ヘッダー直下くらいに調整
+  right: 2rem;
+  z-index: 1040;
+
+  @media (max-width: 768px) {
+    top: 80px;
+    right: 1rem;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.top-material-section {
+  background-color: #2C3930;
+
+  h2 {
+    font-weight: bold;
+  }
+}
