@@ -1,44 +1,47 @@
-<h2>新規登録</h2>
+<div class="container mt-4">
+  <h1 class="mb-4 text-center">新規登録</h1>
 
-<%= form_with model: @user, url: user_registration_path do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
+  <%= form_with model: @user, url: user_registration_path do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label "名前" %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
+    <div class="form-group">
+      <%= f.label "名前", class: "font-weight-bold" %>
+      <%= f.text_field :name, autofocus: true, class: "form-control", style: "width:50%" %>
+    </div>
 
-  <div class="field">
-    <%= f.label "表示名" %><br />
-    <%= f.text_field :nickname, autofocus: true %>
-  </div>
+    <div class="form-group">
+      <%= f.label "表示名", class: "font-weight-bold" %>
+      <%= f.text_field :nickname, autofocus: true, class: "form-control", style: "width:50%" %>
+    </div>
 
-  <div class="field">
-    <%= f.label "診療科" %><br />
-    <%= f.text_field :clinical_department, autofocus: true %>
-  </div>
+    <div class="form-group">
+      <%= f.label "診療科", class: "font-weight-bold" %>
+      <%= f.text_field :clinical_department, autofocus: true, class: "form-control", style: "width:50%" %>
+      <div id="formHelp" class="form-text"> 最後に必ず"科"をつけてください.</div>
+    </div>
 
-  <div class="field">
-    <%= f.label "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="form-group">
+      <%= f.label "メールアドレス", class: "font-weight-bold" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", style: "width:50%" %>
+    </div>
 
-  <div class="field">
-    <%= f.label "パスワード" %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <div class="form-group">
+      <%= f.label "パスワード", class: "font-weight-bold" %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control", style: "width:50%" %>
+    </div>
 
-  <div class="field">
-    <%= f.label "パスワード(確認用)" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="form-group">
+      <%= f.label "パスワード(確認用)", class: "font-weight-bold" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", style: "width:50%" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "新規登録" %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <%= f.submit "新規登録", class: "btn btn-primary" %>
+    </div>
+  <% end %>
 
-<%= render "public/shared/links" %>
+  <%= render "public/shared/links" %>
+</div>

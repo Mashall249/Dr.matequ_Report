@@ -1,5 +1,5 @@
 .card {
-  border-radius: 1rem;
+  border-radius: 16px;
   transition: transform 0.2s ease;
   &:hover {
     transform: translateY(-4px);
@@ -7,14 +7,24 @@
 
   .card-title {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 20px;
   }
 
   .text-muted {
-    font-size: 0.85rem;
+    font-size: 13.5px;
   }
 
   .avg-star-rating {
-    font-size: 1.2rem;
+    font-size: 20px;
+  }
+}
+
+.external-link a {
+  color: #00c8ff;
+  text-decoration: none;
+
+  &:hover {
+    color: #009acd;
+    text-decoration: underline;
   }
 }

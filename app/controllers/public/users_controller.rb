@@ -3,7 +3,6 @@ class Public::UsersController < ApplicationController
 
   def mypage
     @user = current_user
-    @materials = @user.materials
   end
 
   def edit

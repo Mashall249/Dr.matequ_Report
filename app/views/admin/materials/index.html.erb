@@ -1,27 +1,46 @@
-<h1>全機器一覧</h1>
+<div class="container mt-4">
+  <h1 class="mb-4 text-center">全機器一覧</h1>
 
-<table>
+  <div class="row g-3">
   <% @materials.each do |material| %>
-    <tr>
-      <td><%= image_tag material.get_image(50, 50) %></td>
-      <td>
-        <%=link_to material.name, admin_material_path(material) %>
-        <%= material.genre.name %>
-      </td>
-      <td>
-        <i class="fa-regular fa-circle-check"></i>：<%= material.favorites.count %>件
-        <i class="fa-solid fa-comment"></i>：<%= material.comments.count %>件
-      </td>
-      <td>
-        <% avg = material.comments.average(:star) %>
-        <% if avg.present? %>
-          <div class="avg-star-rating" data-score="<%= avg.to_f.round(1) %>"></div>
-          <%= avg.to_f.round(1) %>
-        <% else %>
-          <p>0.0</p>
-        <% end %>
-        <div class="avg-star-rating" id="star_<%= material.id %>" data-score="<%= avg.to_f.round(1) %>"></div>
-      </td>
-    </tr>
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 bg-body text-dark border-0 shadow-sm">
+        <div class="card-body d-flex flex-column">
+
+        <!-- 画像 -->
+          <div class="text-center mb-3">
+            <%= image_tag material.get_image(80, 80), class: "rounded" %>
+          </div>
+
+          <!-- タイトル・ジャンル名 -->
+          <h5 class="card-title text-center  text-decoration-none text-dark mb-1">
+            <%= material.name %>
+          </h5>
+          <p class="text-center text-muted small mb-2"><%= material.genre.name %></p>
+
+          <!-- いいね・コメント数 -->
+          <div class="d-flex justify-content-around small mb-2">
+            <span><i class="fa-regular fa-circle-check"></i> <%= material.favorites.count %>件</span>
+            <span><i class="fa-solid fa-comment"></i> <%= material.comments.count %>件</span>
+          </div>
+
+          <!-- 平均評価 -->
+          <div class="text-center mb-2">
+            <% avg = material.comments.average(:star) %>
+            <% if avg.present? %>
+              <div class="avg-star-rating" data-score="<%= avg.to_f.round(1) %>"></div>
+              <p class="small text-muted mb-0"><%= avg.to_f.round(1) %> / 5</p>
+            <% else %>
+              <p class="small text-muted mb-0">評価なし</p>
+            <% end %>
+          </div>
+
+          <div class="mt-auto text-center">
+            <%= link_to "詳細を見る", admin_material_path(material), class: "btn btn-outline-secondary btn-sm" %>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
-</table>
+</div>
+</div>

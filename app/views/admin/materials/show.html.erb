@@ -1,24 +1,64 @@
-<h1>詳細ページ</h1>
+<div class="bg-light rounded container py-4">
 
-<%= image_tag @material.get_image(200, 200) %>
-<p><%= @material.name %></p>
-<p>特徴</p>
-<p><%= @material.body %></p>
-<p>URL</p>
-<%= Rinku.auto_link(@material.url, :all, 'target="_blank"').html_safe %>
+  <!-- 上部：画像＋タイトル＋評価＋アクション -->
+  <div class="row mb-4 p-3">
+    <div class="col-md-4 text-center">
+      <%= image_tag @material.get_image(200, 200), class: "img-fluid rounded border" %>
+    </div>
 
-<%= link_to "編集する", edit_admin_material_path(@material) %>
+    <div class="col-md-8 position-relative">
 
-<p><i class="fa-regular fa-circle-check"></i>：<%= @material.favorites.count %>件</p>
-<p><i class="fa-solid fa-comment"></i>：<%= @material.comments.count %>件</p>
+      <!-- タイトル＋ジャンル -->
+      <h2 class="text-dark"><%= @material.name %></h2>
+      <p class="text-muted"><%= @material.genre.name %></p>
 
-<% @material.comments.each do |comment| %>
-  <%= comment.user.nickname %><br>
+      <!-- 平均評価 -->
+      <div class="d-flex align-items-center gap-3 my-2">
+        <% avg = @material.comments.average(:star) %>
+        <div class="avg-star-rating" data-score="<%= avg.to_f.round(1) %>"></div>
+        <span class="text-warning mx-3 font-weight-bold"><%= avg.to_f.round(1) %></span>
+      </div>
 
-  <div class="comment-star-rating" data-score="<%= comment.star %>"></div>
+      <!-- 編集ボタン -->
+      <div class="mb-2">
+        <%= link_to "編集する", edit_admin_material_path(@material), class: "btn btn-outline-dark btn-sm me-2" %>
+      </div>
 
-  <p>良いポイント</p><%= comment.good_comment %>
-  <p>使いにくいポイント</p><%= comment.bad_comment %>
+      <!-- いいね数・コメント数 -->
+      <div class="mt-2 text-dark">
+        <i class="fa-regular fa-circle-check"></i> いいね：<%= @material.favorites.count %>件　
+        <i class="fa-solid fa-comment"></i> コメント：<%= @material.comments.count %>件
+      </div>
+    </div>
+  </div>
 
-  <%= link_to "削除する", admin_material_comment_path(comment.material, comment), method: :delete %>
-<% end %>
+  <!-- 特徴・リンク -->
+  <div class="bg-secondary rounded p-3 mb-4 text-light">
+    <h4>特徴</h4>
+    <p><%= @material.body %></p>
+
+    <% if @material.url.present? %>
+      <p class="external-link">
+        外部リンク：<%= Rinku.auto_link(@material.url, :all, 'target="_blank"').html_safe %>
+      </p>
+    <% end %>
+  </div>
+
+  <!-- コメントセクション -->
+  <div class="bg-light rounded border border-success p-3 text-dark">
+    <h4 class="my-2">レビュー一覧</h4>
+    <% @material.comments.each do |comment| %>
+      <div class="border-bottom py-2 m-4">
+        <h5 class="font-weight-bold mb-2"><%= comment.user.nickname %></h5>
+        <div class="comment-star-rating mb-4" data-score="<%= comment.star %>"></div>
+        <p class="mb-2"><strong>良い点：</strong> <%= comment.good_comment %></p>
+        <p class="mb-4"><strong>使いにくい点：</strong> <%= comment.bad_comment %></p>
+
+        <% if comment.user == current_user %>
+          <%= link_to "削除する", admin_material_comment_path(comment.material, comment), method: :delete, class: "btn btn-sm btn-danger" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+</div>

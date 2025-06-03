@@ -1,25 +1,27 @@
-<h1>会員一覧</h1>
+<div class="container mt-4">
+  <h1 class="mb-4 text-center">会員一覧</h1>
 
-<table>
-  <tr>
-    <th>ユーザーID</th>
-    <th>名前</th>
-    <th>メールアドレス</th>
-    <th>ステータス</th>
-  </tr>
-
-  <% @users.each do |user| %>
+  <table>
     <tr>
-      <td><%= user.id %></td>
-      <td><%= link_to user.name, admin_user_path(user) %></td>
-      <td><%= user.email %></td>
-      <td>
-        <% if user.is_active %>
-          <span class = "text-success">有効</td>
-        <% else %>
-          <span class = "text-secondary">退会</td>
-        <% end %>
-      </td>
+      <th>ユーザーID</th>
+      <th>名前</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
     </tr>
-  <% end %>
-</table>
+
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= link_to user.name, admin_user_path(user) %></td>
+        <td><%= user.email %></td>
+        <td>
+          <% if user.is_active %>
+            <span class = "text-success">有効</td>
+          <% else %>
+            <span class = "text-secondary">退会</td>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

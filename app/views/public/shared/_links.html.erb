@@ -1,7 +1,9 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "ログイン", new_session_path(resource_name) %><br />
+  すでに登録済みの方は下のボタンから！<br>
+  <%= link_to "ログインへ移動する", new_session_path(resource_name), class: "btn btn-secondary my-2" %>
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "新規登録", new_registration_path(resource_name) %><br />
+  登録がまだお済みでない方は下のボタンから！<br>
+  <%= link_to "新規登録に移動する", new_registration_path(resource_name), class: "btn btn-secondary my-2" %>
 <% end %>

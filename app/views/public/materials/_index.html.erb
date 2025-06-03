@@ -7,16 +7,18 @@
             <%= image_tag material.get_image(80, 80), class: "rounded" %>
           </div>
 
-          <h5 class="card-title text-center mb-1">
-            <%= link_to material.name, material_path(material), class: "text-decoration-none text-dark" %>
+          <h5 class="card-title text-center  text-decoration-none text-dark mb-1">
+            <%= material.name %>
           </h5>
           <p class="text-center text-muted small mb-2"><%= material.genre.name %></p>
 
+          <!-- いいね・コメント数 -->
           <div class="d-flex justify-content-around small mb-2">
             <span><i class="fa-regular fa-circle-check"></i> <%= material.favorites.count %>件</span>
             <span><i class="fa-solid fa-comment"></i> <%= material.comments.count %>件</span>
           </div>
 
+          <!-- 評価（平均値） -->
           <div class="text-center mb-2">
             <% avg = material.comments.average(:star) %>
             <% if avg.present? %>

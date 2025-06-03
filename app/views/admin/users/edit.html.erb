@@ -1,37 +1,39 @@
-<h1>ユーザー編集画面</h1>
+<div class="container mt-4">
+  <h1 class="mb-4 text-center">ユーザー編集画面</h1>
 
-<%= form_with model: @user,url: admin_user_path(@user), local: true, method: :patch do |f| %>
+  <%= form_with model: @user,url: admin_user_path(@user), local: true, method: :patch do |f| %>
 
-  <div class="field">
-    <%= f.label "名前" %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
+    <div class="form-group">
+      <%= f.label "名前" %><br>
+      <%= f.text_field :name, autofocus: true, class: "form-control", style: "width:50%" %>
+    </div>
 
-  <div class="field">
-    <%= f.label "表示名" %><br />
-    <%= f.text_field :nickname, autofocus: true %>
-  </div>
+    <div class="form-group">
+      <%= f.label "表示名" %><br>
+      <%= f.text_field :nickname, autofocus: true, class: "form-control", style: "width:50%" %>
+    </div>
 
-  <div class="field">
-    <%= f.label "診療科" %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+    <div class="form-group">
+      <%= f.label "診療科" %><br>
+      <%= f.email_field :email, autofocus: true, class: "form-control", style: "width:50%" %>
+    </div>
 
-  <div class="field">
-    <%= f.label "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="form-group">
+      <%= f.label "メールアドレス" %><br>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", style: "width:50%" %>
+    </div>
 
-  <div class="field">
-    <%= f.label "ユーザーステータス" %><br />
-    <%= f.radio_button :is_active, :true %>
-    <%= f.label :is_active, "有効", { value: :true }  %>
+    <div class="form-group">
+      <%= f.label "ユーザーステータス" %><br>
+      <%= f.radio_button :is_active, :true %>
+      <%= f.label :is_active, "有効", { value: :true }  %>
 
-    <%= f.radio_button :is_active, :false %>
-    <%= f.label :is_active, "退会", { value: :false } %>
-  </div>
+      <%= f.radio_button :is_active, :false %>
+      <%= f.label :is_active, "退会", { value: :false } %>
+    </div>
 
-  <div class="field">
-    <%= f.submit "更新する" %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <%= f.submit "更新する", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

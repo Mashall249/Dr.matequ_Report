@@ -1,9 +1,25 @@
-<h1>About</h1>
-<p>This website will be a review site for medical equipment and materials.<br>
-Please feel free to browse!</p>
+<div class="container my-5">
 
-<h4>Profile</h4>
-<p><strong>My Name</strong></p>
-<p>Masahito Nakajima</p>
-<p><strong>My Skill</strong></p>
-<p>HTML/CSS/JavaScript/Ruby/Rails</p>
+  <h1 class="mb-4 pb-2 text-center">About</h1>
+    <h4 class="fs-5 m-4 text-center">
+      This website will be a review site for medical equipment and materials.<br>
+      Please feel free to browse!
+    </h4>
+
+  <div class="card bg-white text-dark shadow rounded-4 m-4 p-4">
+
+    <h2 class="mb-3">Profile</h2>
+
+    <div class="d-flex align-items-center mb-3">
+      <div class="mx-3">
+        <%= image_tag "my_icon.png", class: "rounded-circle", size: "140x140" %>
+      </div>
+      <div class="ml-3">
+        <i class="fa-solid fa-person"></i> <strong>My Name</strong><br>
+        Masahito Nakajima<br><br>
+        <i class="fa-solid fa-code"></i> <strong>My Skill</strong><br>
+        HTML / CSS / JavaScript / Ruby / Rails
+      </div>
+    </div>
+  </div>
+</div>

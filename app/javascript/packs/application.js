@@ -22,7 +22,6 @@ window.raty = function(elem,opt) {
 
 import './preview.js';
 import './star.js';
-import './favorite.js';
 import './slidebar.js';
 
 Rails.start()
