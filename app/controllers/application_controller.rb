@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :search
 
   def search
-    @q = Material.ransack(params[:q])
+    @q = Material.approved.ransack(params[:q])
     @material = @q.result(distinct: true)
     @result = params[:q]&.values&.reject(&:blank?)
   end

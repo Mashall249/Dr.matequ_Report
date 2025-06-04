@@ -11,13 +11,13 @@ class Public::MaterialsController < ApplicationController
     if @material.save
       redirect_to material_path(@material), notice: "登録に成功しました！"
     else
-      @materials = Material.all
+      @materials = Material.approved.page(params[:page]).per(10)
       render "index"
     end
   end
 
   def index
-    @materials = Material.all
+    @materials = Material.approved.page(params[:page]).per(10)
   end
 
   def show
@@ -45,7 +45,7 @@ class Public::MaterialsController < ApplicationController
 
   private
    def material_params
-    params.require(:material).permit(:name, :body, :url, :is_deleted, :image, :genre_id)
+    params.require(:material).permit(:name, :body, :url, :status, :image, :genre_id)
    end
 
 end

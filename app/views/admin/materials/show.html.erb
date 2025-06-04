@@ -24,7 +24,7 @@
         <%= link_to "編集する", edit_admin_material_path(@material), class: "btn btn-outline-dark btn-sm me-2" %>
       </div>
 
-      <!-- いいね数・コメント数 -->
+      <!-- いいね数・コメント数(非同期なしのため) -->
       <div class="mt-2 text-dark">
         <i class="fa-regular fa-circle-check"></i> いいね：<%= @material.favorites.count %>件　
         <i class="fa-solid fa-comment"></i> コメント：<%= @material.comments.count %>件
@@ -54,9 +54,7 @@
         <p class="mb-2"><strong>良い点：</strong> <%= comment.good_comment %></p>
         <p class="mb-4"><strong>使いにくい点：</strong> <%= comment.bad_comment %></p>
 
-        <% if comment.user == current_user %>
           <%= link_to "削除する", admin_material_comment_path(comment.material, comment), method: :delete, class: "btn btn-sm btn-danger" %>
-        <% end %>
       </div>
     <% end %>
   </div>

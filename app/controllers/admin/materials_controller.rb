@@ -2,7 +2,24 @@ class Admin::MaterialsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @materials = Material.page(params[:page]).per(10)
+    #ステータスをタブで切り替えれるようにする定義
+    if params[:status].present? && Material.statuses.key?(params[:status])
+      @materials = Material.public_send(params[:status]).page(params[:page]).per(10)
+    else
+      @materials = Material.page(params[:page]).per(10)
+    end
+
+    # カウント（全ステータス）
+    @status_counts = {
+      pending: Material.pending.count,
+      approved: Material.approved.count,
+      rejected: Material.rejected.count
+    }
+
+    respond_to do |format|
+      format.html # 通常のブラウザリクエストに対して
+      format.js   # Ajaxリクエスト（remote: true等）に対して
+    end
   end
 
   def show
@@ -26,6 +43,6 @@ class Admin::MaterialsController < ApplicationController
   private
 
   def material_params
-    params.require(:material).permit(:name, :body, :url, :is_deleted, :image, :genre_id)
+    params.require(:material).permit(:name, :body, :url, :status, :image, :genre_id)
   end
 end

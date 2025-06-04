@@ -1,38 +1,43 @@
 <div class="container mt-4">
   <h1 class="mb-4 text-center"><%= @user.name %>さんの詳細情報</h1>
 
-  <table>
-    <tr>
-      <th>名前</th>
-      <td><%= @user.name %></td>
-    </tr>
+  <div class="row justify-content-center">
+    <table class="table table-striped table-light col-6 my-4">
+      <tr>
+        <th>名前</th>
+        <td><%= @user.name %></td>
+      </tr>
 
-    <tr>
-      <th>表示名</th>
-      <td><%= @user.nickname %></td>
-    </tr>
+      <tr>
+        <th>表示名</th>
+        <td><%= @user.nickname %></td>
+      </tr>
 
-    <tr>
-      <th>メールアドレス</th>
-      <td><%= @user.email %></td>
-    </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= @user.email %></td>
+      </tr>
 
-    <tr>
-      <th>診療科</th>
-      <td><%= @user.clinical_department %></td>
-    </tr>
+      <tr>
+        <th>診療科</th>
+        <td><%= @user.clinical_department %></td>
+      </tr>
 
-    <tr>
-      <th>ユーザーステータス</th>
-      <th class ="text-left">
-        <% if @user.is_active %>
-          <span class = "text-success">有効</span>
-        <% else %>
-          <span class = "text-secondary">退会</span>
-        <% end %>
-      </th>
-    </tr>
-  </table>
+      <tr>
+        <th>ユーザーステータス</th>
+        <th>
+          <% if @user.is_active %>
+            <span class = "text-success">有効</span>
+          <% else %>
+            <span class = "text-secondary">退会</span>
+          <% end %>
+        </th>
+      </tr>
 
-  <%= link_to "編集する", admin_user_path(@user) %>
+      <tr>
+        <th><%= link_to "編集する", edit_admin_user_path(@user), class: "btn btn-primary" %></th>
+        <td></td>
+      </tr>
+    </table>
+  </div>
 </div>

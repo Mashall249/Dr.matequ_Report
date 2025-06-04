@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 2025_05_28_044153) do
     t.string "name", null: false
     t.text "body", null: false
     t.string "url", null: false
-    t.boolean "is_deleted", default: true, null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

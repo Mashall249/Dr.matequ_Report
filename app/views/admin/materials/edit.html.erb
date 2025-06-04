@@ -1,38 +1,47 @@
 <div class="container mt-4">
-  <h1 class="mb-4 text-center>編集画面</h1>
+  <h1 class="mb-4 text-center">編集画面</h1>
 
-  <%= form_with model: material, local: true do |f| %>
+  <%= form_with model: @material, local: true do |f| %>
     <div class = "form-group">
-      < f.label : "画像" %>
-      <%= f.file_field :image, accept: "image/*" %>
+      <%= f.label "画像" %>
+      <%= f.file_field :image, accept: "image/*", class: "form-control-file" %>
     </div>
 
     <div class = "form-group">
-      < f.label : "製品名" %>
-      <%= f.text_field :name, placeholder: "製品名" %>
+      <%= f.label "製品名" %>
+      <%= f.text_field :name, placeholder: "製品名", class: "form-control", style: "width:50%" %>
     </div>
 
     <div class = "form-group">
-      < f.label : "特徴" %>
-      <%= f.text_area :body, placeholder: "ここに特徴を記載してください" %>
+      <%= f.label "特徴" %>
+      <%= f.text_area :body, placeholder: "ここに特徴を記載してください", class: "form-control", style: "width:50%" %>
     </div>
 
     <div class = "form-group">
-      < f.label : "URL" %>
-      <%= f.text_area :url, placeholder: "ここに製品のURLを記載してください" %>
+      <%= f.label "URL" %>
+      <%= f.text_area :url, placeholder: "ここに製品のURLを記載してください", class: "form-control", style: "width:50%" %>
     </div>
 
     <div class="form-group">
-      <%= f.label :ジャンル %>
-      <%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--選択してください--" %>
+      <%= f.label "ジャンル" %>
+      <%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--選択してください--", class: "form-control" %>
     </div>
 
-      <%= f.radio_button :is_delete, true, checked: true %>
-      <%= f.label :is_delete, "承認待ち" %>
-      <%= f.radio_button :is_delete, false %>
-      <%= f.label :is_delete, "承認済み" %>
+    <!-- 承認ステータス -->
+    <div class="form-group">
+      <label>ステータス:</label><br>
 
-    <%= f.submit "新規登録", class:"btn btn-success" %>
-    <%= link_to "削除", admin_material_path(@material), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      <%= f.radio_button :status, "pending" %>
+      <%= f.label :status_pending, "承認待ち" %>
+
+      <%= f.radio_button :status, "approved" %>
+      <%= f.label :status_approved, "承認済み" %>
+
+      <%= f.radio_button :status, "rejected" %>
+      <%= f.label :status_rejected, "却下" %>
+    </div>
+
+    <%= f.submit "更新", class:"btn btn-primary mx-3" %>
+    <%= link_to "削除", admin_material_path(@material), method: :delete, class:"btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
   <% end %>
 </div>

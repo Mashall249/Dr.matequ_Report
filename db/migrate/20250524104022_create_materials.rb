@@ -7,7 +7,7 @@ class CreateMaterials < ActiveRecord::Migration[6.1]
       t.string :name, null: false
       t.text :body, null: false
       t.string :url, null: false
-      t.boolean :is_deleted, null: false, default: true
+      t.integer :status, null: false, default: 0
       t.timestamps
     end
   end

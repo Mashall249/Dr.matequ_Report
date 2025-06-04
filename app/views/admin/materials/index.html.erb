@@ -2,45 +2,25 @@
   <h1 class="mb-4 text-center">全機器一覧</h1>
 
   <div class="row g-3">
-  <% @materials.each do |material| %>
-    <div class="col-md-6 col-lg-4">
-      <div class="card h-100 bg-body text-dark border-0 shadow-sm">
-        <div class="card-body d-flex flex-column">
+    <!-- タブ切り替え -->
+    <ul class="nav nav-tabs mb-3">
+      <li class="nav-item">
+        <%= link_to "すべて", admin_materials_path, remote: true, class: "nav-link #{params[:status].blank? ? 'active' : ''}" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "承認待ち (#{@status_counts[:pending]})", admin_materials_path(status: "pending"), remote: true, class: "nav-link #{params[:status] == 'pending' ? 'active' : ''}" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "承認済み (#{@status_counts[:approved]})", admin_materials_path(status: "approved"), remote: true, class: "nav-link #{params[:status] == 'approved' ? 'active' : ''}" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "却下 (#{@status_counts[:rejected]})", admin_materials_path(status: "rejected"), remote: true, class: "nav-link #{params[:status] == 'rejected' ? 'active' : ''}" %>
+      </li>
+    </ul>
 
-        <!-- 画像 -->
-          <div class="text-center mb-3">
-            <%= image_tag material.get_image(80, 80), class: "rounded" %>
-          </div>
-
-          <!-- タイトル・ジャンル名 -->
-          <h5 class="card-title text-center  text-decoration-none text-dark mb-1">
-            <%= material.name %>
-          </h5>
-          <p class="text-center text-muted small mb-2"><%= material.genre.name %></p>
-
-          <!-- いいね・コメント数 -->
-          <div class="d-flex justify-content-around small mb-2">
-            <span><i class="fa-regular fa-circle-check"></i> <%= material.favorites.count %>件</span>
-            <span><i class="fa-solid fa-comment"></i> <%= material.comments.count %>件</span>
-          </div>
-
-          <!-- 平均評価 -->
-          <div class="text-center mb-2">
-            <% avg = material.comments.average(:star) %>
-            <% if avg.present? %>
-              <div class="avg-star-rating" data-score="<%= avg.to_f.round(1) %>"></div>
-              <p class="small text-muted mb-0"><%= avg.to_f.round(1) %> / 5</p>
-            <% else %>
-              <p class="small text-muted mb-0">評価なし</p>
-            <% end %>
-          </div>
-
-          <div class="mt-auto text-center">
-            <%= link_to "詳細を見る", admin_material_path(material), class: "btn btn-outline-secondary btn-sm" %>
-          </div>
-        </div>
-      </div>
+    <!-- indexの部分テンプレート -->
+    <div id="materials-list">
+      <%= render "admin/materials/index", materials: @materials %>
     </div>
-  <% end %>
-</div>
+  </div>
 </div>

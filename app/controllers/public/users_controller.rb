@@ -3,6 +3,23 @@ class Public::UsersController < ApplicationController
 
   def mypage
     @user = current_user
+
+    if params[:status].present? && Material.statuses.key?(params[:status])
+      @user.materials = Material.public_send(params[:status]).page(params[:page]).per(10)
+    else
+      @user.materials = Material.page(params[:page]).per(10)
+    end
+
+    @status_counts = {
+      pending: Material.pending.count,
+      approved: Material.approved.count,
+      rejected: Material.rejected.count
+    }
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit

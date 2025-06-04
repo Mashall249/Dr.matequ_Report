@@ -7,8 +7,11 @@ class Material < ApplicationRecord
   has_one_attached :image
 
   validates :name, presence: true
-  validates :body, presence: true, length: {minimum: 10}
+  validates :body, presence: true, length: { minimum: 10 }
   validates :url, presence: true
+
+  #承認ステータスの定義
+  enum status: { pending: 0, approved: 1, rejected: 2 }
 
   #機器検索のための定義
   def self.search_for(content, method)

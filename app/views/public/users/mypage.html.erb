@@ -20,21 +20,40 @@
 
       <!-- 自分の投稿一覧 -->
       <div class="m-5">
-          <h4 class="mb-3 text-white">自分の登録した機器一覧</h4>
-          <%= link_to "新規投稿する", new_material_path, class: "btn btn-secondary btn-lg" %>
+        <h4 class="mb-3 text-white">自分の登録した機器一覧</h4>
+
+        <!-- タブ切り替え -->
+        <ul class="nav nav-tabs mb-3">
+          <li class="nav-item">
+            <%= link_to "すべて", admin_materials_path, remote: true, class: "nav-link #{params[:status].blank? ? 'active' : ''}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "承認待ち (#{@status_counts[:pending]})", admin_materials_path(status: "pending"), remote: true, class: "nav-link #{params[:status] == 'pending' ? 'active' : ''}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "承認済み (#{@status_counts[:approved]})", admin_materials_path(status: "approved"), remote: true, class: "nav-link #{params[:status] == 'approved' ? 'active' : ''}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "却下 (#{@status_counts[:rejected]})", admin_materials_path(status: "rejected"), remote: true, class: "nav-link #{params[:status] == 'rejected' ? 'active' : ''}" %>
+          </li>
+        </ul>
+
+        <%= link_to "新規投稿する", new_material_path, class: "btn btn-secondary btn-lg" %>
+        <div id="user-materials-list">
           <%= render 'public/materials/index', materials: @user.materials %>
+        </div>
       </div>
 
       <!-- 自分の投稿一覧 -->
       <div class="m-5">
         <h4 class="mb-3 text-white">お気に入り一覧</h4>
-        <!-- ユーザーのお気に入り取得 + N+1問題回避 + Favoriteに関連づいたMaterialの取り出し -->
+        <!-- ユーザーのお気に入り取得 + N+1問題回避(includes) + Favoriteに関連づいたMaterialの取り出し(map) -->
         <%= render 'public/materials/index', materials: @user.favorites.includes(:material).map(&:material) %>
       </div>
 
       <!-- コメント一覧 -->
       <div class="m-5">
-        <%= render 'public/favorites/index', comments: @user.materials.includes(:comments).map(&:comments).flatten %>
+        <%= render 'public/comments/index', comments: @user.materials.includes(:comments).map(&:comments).flatten %>
       </div>
     </div>
 </div>
