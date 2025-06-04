@@ -38,8 +38,7 @@
 
       <!-- いいね数・コメント数 -->
       <div class="mt-2 text-dark">
-        <i class="fa-regular fa-circle-check"></i> いいね：<%= @material.favorites.count %>件　
-        <i class="fa-solid fa-comment"></i> コメント：<%= @material.comments.count %>件
+        <%= render "public/materials/meta_counts", material: @material %>
       </div>
     </div>
   </div>
@@ -57,5 +56,5 @@
   </div>
 
   <!-- コメント -->
-  <%= render 'public/favorites/index', material: @material %>
+  <%= render 'public/favorites/index', comments: @material.comments %>
 </div>

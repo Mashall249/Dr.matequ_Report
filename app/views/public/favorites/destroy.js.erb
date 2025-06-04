@@ -1,0 +1,5 @@
+// いいねボタンの更新
+$("#favorite_btn_<%= @material.id %>").html("<%= j(render 'public/favorites/btn', material: @material) %>");
+
+// いいね数・コメント数の更新
+$("#meta_counts_<%= @material.id %>").html("<%= j(render 'public/materials/meta_counts', material: @material) %>");

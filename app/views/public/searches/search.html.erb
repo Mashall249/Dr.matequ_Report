@@ -1,2 +1,8 @@
- <h3>"<%= @content %>" の検索結果</h3>
-  <%= render 'public/materials/index', materials: @records %>
+<% if @result.present? %>
+  <h3>「<%= @result.join('・') %>」の検索結果</h3>
+  <h5><%= @material.count %> 件</h5>
+  <%= render 'public/materials/index', materials: @material %>
+<% else %>
+  <h3>検索結果</h3>
+  <p>キーワードを入力してください。<p>
+<% end %>

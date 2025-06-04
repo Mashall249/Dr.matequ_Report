@@ -30,4 +30,9 @@ class Material < ApplicationRecord
   def get_image(width, height)
     image.variant(resize: "#{width}x#{height}!").processed
   end
+
+  #Ransack用のモデルコード
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name body created_at genre_id id is_deleted updated_at url user_id]
+  end
 end
