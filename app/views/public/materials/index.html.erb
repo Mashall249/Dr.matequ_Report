@@ -2,4 +2,5 @@
   <h1 class="mb-4 text-center">全機器一覧</h1>
 
   <%= render 'public/materials/index', materials: @materials %>
+  <%= paginate @materials %>
 </div>

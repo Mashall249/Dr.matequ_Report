@@ -55,6 +55,23 @@
     <% end %>
   </div>
 
+  <!-- 評価グラフ表示 -->
+      <div class="rating-distribution my-4">
+        <% (1..5).reverse_each do |i| %>
+          <div class="d-flex align-items-center mb-1 text-dark">
+            <div class="me-2" style="width: 60px;">星<%= i %></div>
+
+            <!-- 横棒グラフ表示 -->
+            <div class="progress" style="width: 25%; height: 18px;">
+              <div class="progress-bar bg-warning" role="progressbar"
+                  style="width: <%= (@star_counts[i].to_f / @material.comments.count * 100).round(1) %>%;">
+                <%= @star_counts[i] %>件
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
   <!-- コメント -->
   <%= render 'public/comments/index', comments: @material.comments %>
 </div>

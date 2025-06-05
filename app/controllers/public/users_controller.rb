@@ -3,11 +3,12 @@ class Public::UsersController < ApplicationController
 
   def mypage
     @user = current_user
+    @materials = @user.materials
 
     if params[:status].present? && Material.statuses.key?(params[:status])
-      @user.materials = Material.public_send(params[:status]).page(params[:page]).per(10)
+      @materials = Material.public_send(params[:status]).page(params[:page]).per(10)
     else
-      @user.materials = Material.page(params[:page]).per(10)
+      @materials = Material.page(params[:page]).per(10)
     end
 
     @status_counts = {

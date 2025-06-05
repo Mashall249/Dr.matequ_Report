@@ -22,6 +22,12 @@ class Public::MaterialsController < ApplicationController
 
   def show
     @material = Material.find(params[:id])
+
+    #グラフを算出するための定義(ハッシュに変換)
+    @star_counts = (1..5).map do |i|
+      [i, @material.comments.where(star: i).count]
+    end.to_h
+    @max_count = @star_counts.values.max
   end
 
   def edit

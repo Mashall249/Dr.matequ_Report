@@ -9,7 +9,7 @@
       <h3><%= @user.clinical_department %></h3>
 
       <div class="d-flex justify-content-center mt-3 gap-3">
-        <span><i class="fa-regular fa-circle-check"></i> 使用数：<%= @user.favorites.count %></span>
+        <span><i class="fa-regular fa-circle-check"></i> 使用数：<%= @user.favorites.count %></span>　
         <span><i class="fa-solid fa-comment"></i> コメント・レビュー数：<%= @user.comments.count %></span>
       </div>
 
@@ -21,26 +21,26 @@
       <!-- 自分の投稿一覧 -->
       <div class="m-5">
         <h4 class="mb-3 text-white">自分の登録した機器一覧</h4>
+        <%= link_to "新規投稿する", new_material_path, class: "btn btn-secondary" %>
 
         <!-- タブ切り替え -->
         <ul class="nav nav-tabs mb-3">
           <li class="nav-item">
-            <%= link_to "すべて", admin_materials_path, remote: true, class: "nav-link #{params[:status].blank? ? 'active' : ''}" %>
+            <%= link_to "すべて", users_mypage_path, remote: true, class: "nav-link #{params[:status].blank? ? 'active' : ''}" %>
           </li>
           <li class="nav-item">
-            <%= link_to "承認待ち (#{@status_counts[:pending]})", admin_materials_path(status: "pending"), remote: true, class: "nav-link #{params[:status] == 'pending' ? 'active' : ''}" %>
+            <%= link_to "承認待ち (#{@status_counts[:pending]})", users_mypage_path(status: "pending"), remote: true, class: "nav-link #{params[:status] == 'pending' ? 'active' : ''}" %>
           </li>
           <li class="nav-item">
-            <%= link_to "承認済み (#{@status_counts[:approved]})", admin_materials_path(status: "approved"), remote: true, class: "nav-link #{params[:status] == 'approved' ? 'active' : ''}" %>
+            <%= link_to "承認済み (#{@status_counts[:approved]})", users_mypage_path(status: "approved"), remote: true, class: "nav-link #{params[:status] == 'approved' ? 'active' : ''}" %>
           </li>
           <li class="nav-item">
-            <%= link_to "却下 (#{@status_counts[:rejected]})", admin_materials_path(status: "rejected"), remote: true, class: "nav-link #{params[:status] == 'rejected' ? 'active' : ''}" %>
+            <%= link_to "却下 (#{@status_counts[:rejected]})", users_mypage_path(status: "rejected"), remote: true, class: "nav-link #{params[:status] == 'rejected' ? 'active' : ''}" %>
           </li>
         </ul>
 
-        <%= link_to "新規投稿する", new_material_path, class: "btn btn-secondary btn-lg" %>
         <div id="user-materials-list">
-          <%= render 'public/materials/index', materials: @user.materials %>
+          <%= render 'public/materials/index', materials: @materials %>
         </div>
       </div>
 

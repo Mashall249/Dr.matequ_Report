@@ -14,7 +14,7 @@
 
           <!-- いいね・コメント数 -->
           <div class="d-flex justify-content-around small mb-2">
-            <span><i class="fa-regular fa-circle-check"></i> <%= material.favorites.count %>件</span>
+            <span><i class="fa-regular fa-circle-check"></i> <%= material.favorites.count %>件</span>　
             <span><i class="fa-solid fa-comment"></i> <%= material.comments.count %>件</span>
           </div>
 
@@ -36,5 +36,4 @@
       </div>
     </div>
   <% end %>
-  <%= paginate materials %>
 </div>
