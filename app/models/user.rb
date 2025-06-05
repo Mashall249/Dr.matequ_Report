@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :nickname, presence: true, uniqueness: true
-  validates :clinical_department, presence: true, uniqueness: true
+  validates :clinical_department, presence: true
   validate :proper_clinical_department
 
   private
