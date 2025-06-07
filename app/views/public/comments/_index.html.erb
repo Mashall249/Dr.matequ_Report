@@ -8,7 +8,9 @@
       <p class="mb-4"><strong>使いにくい点：</strong> <%= comment.bad_comment %></p>
 
       <% if comment.user == current_user %>
-        <%= link_to "削除する", material_comment_path(comment.material, comment), method: :delete, class: "btn btn-sm btn-danger" %>
+        <%= link_to "削除する", material_comment_path(comment.material, comment), method: :delete, class: "btn btn-danger btn-sm" %>
+      <% else %>
+        <%= link_to "通報する", new_comment_report_path(comment.material), class: "btn btn-warning btn-sm" %>
       <% end %>
     </div>
   <% end %>

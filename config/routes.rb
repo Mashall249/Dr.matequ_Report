@@ -24,9 +24,15 @@ Rails.application.routes.draw do
     get '/search' => 'searches#search'
 
     resources :materials do
-      resources :comments, only: [:new, :create, :destroy]
+
+      resources :comments, only: [:new, :create, :destroy] do
+        resources :reports, only: [:new, :create]
+      end
+
       resource :favorite, only: [:create, :destroy]
+      resources :reports, only: [:new, :create]
     end
+
     resources :genres, only: [:show]
     resources :notifications, only: [:update]
   end

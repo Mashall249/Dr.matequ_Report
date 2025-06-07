@@ -26,12 +26,15 @@
         <span class="text-warning mx-3 font-weight-bold"><%= avg.to_f.round(1) %></span>
       </div>
 
-      <!-- 編集 / コメントボタン -->
+      <!-- 編集 / コメント / 通報ボタン -->
       <% if user_signed_in? %>
         <div class="mb-2">
           <% if @material.user == current_user %>
             <%= link_to "編集する", edit_material_path(@material), class: "btn btn-outline-dark btn-sm me-2" %>
+          <% else %>
+            <%= link_to "通報する", new_material_report_path(@material), class: "btn btn-warning btn-sm me-2" %>
           <% end %>
+
           <%= link_to "コメント/レビューする", new_material_comment_path(@material), class: "btn btn-primary btn-sm" %>
         </div>
       <% end %>
@@ -75,3 +78,7 @@
   <!-- コメント -->
   <%= render 'public/comments/index', comments: @material.comments %>
 </div>
+
+<!-- 通報用モーダル -->
+<%= render 'public/reports/report_material', material: @material %>
+<%= render 'public/reports/report_comment', comment: @material.comment %>

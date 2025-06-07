@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reporatble: one
+  reporatble_type: Reporatble
+  user: one
+  reason: MyText
+  status: MyString
+
+two:
+  reporatble: two
+  reporatble_type: Reporatble
+  user: two
+  reason: MyText
+  status: MyString
