@@ -26,15 +26,18 @@
         <span class="text-warning mx-3 font-weight-bold"><%= avg.to_f.round(1) %></span>
       </div>
 
-      <!-- 編集 / コメント / 通報ボタン -->
+      <!-- 編集 / 通報 / 通報済みボタン -->
       <% if user_signed_in? %>
         <div class="mb-2">
           <% if @material.user == current_user %>
             <%= link_to "編集する", edit_material_path(@material), class: "btn btn-outline-dark btn-sm me-2" %>
-          <% else %>
+          <% elsif current_user && !Report.exists?(user_id: current_user.id, reportable: @material) %>
             <%= link_to "通報する", new_material_report_path(@material), class: "btn btn-warning btn-sm me-2" %>
+          <% else %>
+            <span class="text-muted">通報済み</span>
           <% end %>
 
+          <!-- コメントボタン -->
           <%= link_to "コメント/レビューする", new_material_comment_path(@material), class: "btn btn-primary btn-sm" %>
         </div>
       <% end %>

@@ -7,10 +7,13 @@
       <p class="mb-2"><strong>良い点：</strong> <%= comment.good_comment %></p>
       <p class="mb-4"><strong>使いにくい点：</strong> <%= comment.bad_comment %></p>
 
+      <!-- 削除/通報/通報済みボタン -->
       <% if comment.user == current_user %>
         <%= link_to "削除する", material_comment_path(comment.material, comment), method: :delete, class: "btn btn-danger btn-sm" %>
+      <% elsif current_user && !Report.exists?(user_id: current_user.id, reportable: comment) %>
+        <%= link_to "通報する", new_material_report_path(@material), class: "btn btn-warning btn-sm" %>
       <% else %>
-        <%= link_to "通報する", new_comment_report_path(comment.material), class: "btn btn-warning btn-sm" %>
+        <span class="text-muted">通報済み</span>
       <% end %>
     </div>
   <% end %>

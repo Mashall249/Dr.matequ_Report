@@ -14,4 +14,5 @@ class Report < ApplicationRecord
   enum status: { unreviewed: 'unreviewed', reviewed: 'reviewed', resolved: 'resolved' }
 
   validates :reason, presence: true
+  validates :user_id, uniqueness: { scope: [:reportable_type, :reportable_id], message: "はすでにこの対象を通報しています" }
 end

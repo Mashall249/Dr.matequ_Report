@@ -1,0 +1,49 @@
+<div class="container mt-4">
+  <h1 class="mb-4 text-center">通報詳細</h2>
+
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <td><%= @report.id %></td>
+    </tr>
+    <tr>
+      <th>通報対象</th>
+      <td>
+        <% if @report.reportable_type == "Material" %>
+          レビュー (ID: <%= @report.reportable_id %>)
+        <% elsif @report.reportable_type == "Comment" %>
+          コメント (ID: <%= @report.reportable_id %>)
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>通報理由</th>
+      <td><%= @report.reason.humanize %></td>
+    </tr>
+    <tr>
+      <th>通報したユーザー</th>
+      <td><%= @report.user&.nickname || "退会ユーザー" %></td>
+    </tr>
+    <tr>
+      <th>通報日時</th>
+      <td><%= @report.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+    </tr>
+    <tr>
+      <th>ステータス</th>
+      <td><%= @report.status %></td>
+    </tr>
+  </table>
+
+  <h3>ステータス更新</h3>
+
+  <%= form_with(model: [:admin, @report], method: :patch, local: true) do |f| %>
+    <div class="form-group">
+      <%= f.label :status, "ステータス" %>
+      <%= f.select :status, Report.statuses.keys.map { |s| [s.humanize, s] }, {}, class: "form-control" %>
+    </div>
+
+    <%= f.submit "更新する", class: "btn btn-primary mt-2" %>
+  <% end %>
+  
+  <%= link_to "一覧に戻る", admin_reports_path, class: "btn btn-secondary" %>
+</div>

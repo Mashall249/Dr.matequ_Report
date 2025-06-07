@@ -9,12 +9,13 @@
         </button>
       </div>
 
+      <!-- ラジオボタン選択場所(humanizeで読みやすく) -->
       <div class="modal-body">
         <%= form_with(model: [comment, Report.new]) do |f| %>
           <% Report.reasons.keys.each do |reason| %>
             <div class="form-check">
               <%= f.radio_button :reason, reason, class: "form-check-input", id: "report_reason_<%= reason %>_<%= comment.id %>" %>
-              <%= f.label "report_reason_#{reason}_#{comment.id}", reason.humanize, class: "form-check-label" %>
+              <%= f.label "report_reason_#{reason}_#{comment.id}", report_reason_label(reason), class: "form-check-label" %>
             </div>
           <% end %>
 

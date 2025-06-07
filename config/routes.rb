@@ -24,13 +24,11 @@ Rails.application.routes.draw do
     get '/search' => 'searches#search'
 
     resources :materials do
-
+      resource :favorite, only: [:create, :destroy]
+      resources :reports, only: [:new, :create]
       resources :comments, only: [:new, :create, :destroy] do
         resources :reports, only: [:new, :create]
       end
-
-      resource :favorite, only: [:create, :destroy]
-      resources :reports, only: [:new, :create]
     end
 
     resources :genres, only: [:show]
@@ -41,6 +39,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
+    resources :reports, only: [:index, :show, :update]
     resources :materials, only: [:index, :show, :edit, :update, :destroy] do
       resources :comments, only: [:destroy]
     end

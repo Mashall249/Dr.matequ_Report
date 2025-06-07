@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <h1 class="mb-4 text-center">通報一覧</h1>
+
+  <%= link_to "未確認のみ", admin_reports_path(filter: 'unreviewed'), class: "btn btn-primary mb-3" %>
+  <%= link_to "すべて表示", admin_reports_path, class: "btn btn-secondary mb-3" %>
+  
+  <table class="table table-striped table-light">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>対象</th>
+        <th>通報理由</th>
+        <th>ユーザー</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reports.each do |report| %>
+        <tr>
+
+          <!-- ID -->
+          <td><%= report.id %></td>
+
+          <!-- 機器かコメントに応じてリンクを振り分け -->
+          <td>
+            <% if report.reportable_type == 'Material' %>
+              機器/材料: <%= link_to "確認", material_path(report.reportable_id), target: "_blank" %>
+            <% elsif report.reportable_type == 'Comment' %>
+              コメント: <%= link_to "確認", material_path(report.reportable_id), target: "_blank" %>
+            <% end %>
+          </td>
+
+          <!-- 報告理由(humanizeで読みやすく) -->
+          <td><%= report.reason.humanize %></td>
+
+          <!-- 通報したユーザー名 (tryでnilエラー回避,nilなら退会ユーザーと表示) -->
+          <td><%= report.user.try(:name) || "退会ユーザー" %></td>
+
+          <!-- ステータス(humanizeで読みやすく) -->
+          <td><%= report.status.humanize %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
