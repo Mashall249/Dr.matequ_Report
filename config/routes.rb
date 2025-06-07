@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       resource :favorite, only: [:create, :destroy]
     end
     resources :genres, only: [:show]
+    resources :notifications, only: [:update]
   end
 
   #管理者用ルート

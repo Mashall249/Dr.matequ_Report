@@ -9,6 +9,14 @@ class Public::MaterialsController < ApplicationController
     @material = Material.new(material_params)
     @material.user_id = current_user.id
     if @material.save
+      User.where.not(id: current_user.id).find_each do |user|
+        Notification.create(
+          user: user,
+          notifiable: @material,
+          action: "material_posted",
+          read: false
+        )
+      end
       redirect_to material_path(@material), notice: "登録に成功しました！"
     else
       @materials = Material.approved.page(params[:page]).per(10)

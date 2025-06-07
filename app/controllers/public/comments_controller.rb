@@ -10,8 +10,20 @@ class Public::CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
     @comment.material_id = @material.id
-    @comment.save
-    redirect_to material_path(@material)
+    if @comment.save
+      # 投稿者に通知（ただし自分のには通知しない）
+      if @material.user != current_user
+        Notification.create(
+          user: @material.user,
+          notifiable: @comment,
+          action: "comment_posted",
+          read: false
+        )
+      end
+      redirect_to @material, notice: "コメントしました。"
+    else
+      render :new
+    end
   end
 
   def destroy
