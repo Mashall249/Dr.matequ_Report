@@ -1,0 +1,31 @@
+<div class="modal fade" id="reportModal_<%= comment.id %>" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel_<%= comment.id %>" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="reportModalLabel_<%= comment.id %>">通報する</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <%= form_with(model: [comment, Report.new]) do |f| %>
+          <% Report.reasons.keys.each do |reason| %>
+            <div class="form-check">
+              <%= f.radio_button :reason, reason, class: "form-check-input", id: "report_reason_<%= reason %>_<%= comment.id %>" %>
+              <%= f.label "report_reason_#{reason}_#{comment.id}", reason.humanize, class: "form-check-label" %>
+            </div>
+          <% end %>
+
+          <%= f.submit "通報する", class: "btn btn-danger mt-3" %>
+        <% end %>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+      </div>
+
+    </div>
+  </div>
+</div>
