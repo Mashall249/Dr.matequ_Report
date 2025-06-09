@@ -9,11 +9,13 @@
     <div class="col-md-8 position-relative">
 
       <!-- アクションボタン 右上配置 -->
-      <div style="position: absolute; top: 0; right: 40px; z-index: 10;" class="d-flex">
-        <div id="favorite_btn_<%= @material.id %>">
-          <%= render "public/favorites/btn", material: @material %>
+      <% if user_signed_in? %>
+        <div style="position: absolute; top: 0; right: 40px; z-index: 10;" class="d-flex">
+          <div id="favorite_btn_<%= @material.id %>">
+            <%= render "public/favorites/btn", material: @material %>
+          </div>
         </div>
-      </div>
+      <% end %>
 
       <!-- タイトル＋ジャンル -->
       <h2 class="text-dark"><%= @material.name %></h2>
@@ -84,4 +86,7 @@
 
 <!-- 通報用モーダル -->
 <%= render 'public/reports/report_material', material: @material %>
-<%= render 'public/reports/report_comment', comment: @material.comment %>
+
+<% @material.comments.each do |comment| %>
+  <%= render 'public/reports/report_comment', material: @material, comment: comment %>
+<% end %>

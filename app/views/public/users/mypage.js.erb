@@ -1,4 +1,4 @@
-$("#admin-materials-list").html("<%= j(render 'admin/materials/index', materials: @materials) %>");
+$("#user-materials-list").html("<%= j(render 'public/materials/index', materials: @materials) %>");
 
 // タブの active クラス切り替え
 $(".nav-tabs .nav-link").removeClass("active"); // 全部外す
@@ -6,5 +6,5 @@ $(".nav-tabs .nav-link[href$='status=<%= params[:status] %>']").addClass("active
 
 // 「すべて」タブ用に status パラメータがない場合
 <% if params[:status].blank? %>
-  $(".nav-tabs .nav-link[href='<%= admin_materials_path %>']").addClass("active");
+  $(".nav-tabs .nav-link[href='<%= users_mypage_path %>']").addClass("active");
 <% end %>

@@ -22,6 +22,6 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :nickname, :email, :clinical_department, :is_active)
+    params.require(:user).permit(:name, :nickname, :email, :clinical_department, :is_active, :penalty_until, :penalty_count)
   end
 end

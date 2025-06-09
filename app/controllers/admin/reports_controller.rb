@@ -1,7 +1,7 @@
 class Admin::ReportsController < ApplicationController
 
   def index
-    @reports = Report.order(created_at: :desc)
+    @reports = Report.order(created_at: :desc).page(params[:page]).per(10)
     @reports = @reports.where(status: 'unreviewed') if params[:filter] == 'unreviewed'
   end
 

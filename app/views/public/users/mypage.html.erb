@@ -26,16 +26,16 @@
         <!-- タブ切り替え -->
         <ul class="nav nav-tabs mb-3">
           <li class="nav-item">
-            <%= link_to "すべて", users_mypage_path, remote: true, class: "nav-link #{params[:status].blank? ? 'active' : ''}" %>
+            <%= link_to "すべて", users_mypage_path, remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status].blank? ? 'active' : ''}" %>
           </li>
           <li class="nav-item">
-            <%= link_to "承認待ち (#{@status_counts[:pending]})", users_mypage_path(status: "pending"), remote: true, class: "nav-link #{params[:status] == 'pending' ? 'active' : ''}" %>
+            <%= link_to "承認待ち (#{@status_counts[:pending]})", users_mypage_path(status: "pending"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'pending' ? 'active' : ''}" %>
           </li>
           <li class="nav-item">
-            <%= link_to "承認済み (#{@status_counts[:approved]})", users_mypage_path(status: "approved"), remote: true, class: "nav-link #{params[:status] == 'approved' ? 'active' : ''}" %>
+            <%= link_to "承認済み (#{@status_counts[:approved]})", users_mypage_path(status: "approved"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'approved' ? 'active' : ''}" %>
           </li>
           <li class="nav-item">
-            <%= link_to "却下 (#{@status_counts[:rejected]})", users_mypage_path(status: "rejected"), remote: true, class: "nav-link #{params[:status] == 'rejected' ? 'active' : ''}" %>
+            <%= link_to "却下 (#{@status_counts[:rejected]})", users_mypage_path(status: "rejected"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'rejected' ? 'active' : ''}" %>
           </li>
         </ul>
 

@@ -18,7 +18,7 @@ class Admin::MaterialsController < ApplicationController
 
     respond_to do |format|
       format.html # 通常のブラウザリクエストに対して
-      format.js   # Ajaxリクエスト（remote: true等）に対して
+      format.js  { render 'admin/materials/index' } # Ajaxリクエスト（jsの混同防止でrender指定)
     end
   end
 
