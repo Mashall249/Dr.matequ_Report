@@ -40,6 +40,12 @@ class Admin::MaterialsController < ApplicationController
     end
   end
 
+  def destroy
+    @material = Material.find(params[:id])
+    @material.destroy
+    redirect_to admin_materials_path
+  end
+
   private
 
   def material_params

@@ -19,14 +19,24 @@
         <tr>
 
           <!-- ID -->
-          <td><%= report.id %></td>
+          <td><%= link_to report.id, admin_report_path(report) %></td>
 
           <!-- 機器かコメントに応じてリンクを振り分け -->
           <td>
             <% if report.reportable_type == 'Material' %>
-              機器/材料: <%= link_to "確認", material_path(report.reportable_id), target: "_blank" %>
+              <% material = Material.find_by(id: report.reportable_id) %>
+              <% if material %>
+                機器/材料: <%= link_to "確認", admin_material_path(material), target: "_blank" %>
+              <% else %>
+                機器/材料が見つかりません
+              <% end %>
             <% elsif report.reportable_type == 'Comment' %>
-              コメント: <%= link_to "確認", material_path(report.reportable_id), target: "_blank" %>
+              <% comment = Comment.find_by(id: report.reportable_id) %>
+              <% if comment %>
+                コメント: <%= link_to "親投稿を確認", admin_material_path(comment.material_id), target: "_blank" %>
+              <% else %>
+                コメントが見つかりません
+              <% end %>
             <% end %>
           </td>
 

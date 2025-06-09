@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_06_09_041415) do
+ActiveRecord::Schema.define(version: 2025_06_09_113401) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -99,15 +99,14 @@ ActiveRecord::Schema.define(version: 2025_06_09_041415) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.string "reporatble_type", null: false
-    t.integer "reporatble_id", null: false
+    t.string "reportable_type", null: false
+    t.integer "reportable_id", null: false
     t.integer "user_id", null: false
     t.integer "reason", default: 0, null: false
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"user_id\", \"reportable_type\", \"reportable_id\"", name: "index_reports_on_user_and_reportable", unique: true
-    t.index ["reporatble_type", "reporatble_id"], name: "index_reports_on_reporatble"
+    t.index ["reportable_type", "reportable_id"], name: "index_reports_on_reportable"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 

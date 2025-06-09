@@ -21,7 +21,7 @@ class Public::MaterialsController < ApplicationController
       redirect_to material_path(@material), notice: "登録に成功しました！"
     else
       @materials = Material.approved.page(params[:page]).per(10)
-      render "index"
+      render :new
     end
   end
 
@@ -48,7 +48,7 @@ class Public::MaterialsController < ApplicationController
     if @material.update(material_params)
       redirect_to material_path(@material), notice: "更新に成功しました！"
     else
-      render "edit"
+      render :edit
     end
   end
 

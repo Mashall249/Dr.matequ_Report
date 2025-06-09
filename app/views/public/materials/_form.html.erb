@@ -1,4 +1,16 @@
 <%= form_with model: material, id: 'new_post', local: true do |f| %>
+
+  <% if material.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= material.errors.count %>件エラーが発生しました:</h4>
+      <ul>
+        <% material.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class = "form-group">
     <%= f.label "画像" %><br>
     <%= f.file_field :image, accept: "image/*", id: "image_input" %>

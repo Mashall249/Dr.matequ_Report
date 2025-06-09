@@ -1,6 +1,6 @@
 <div class="modal fade" id="reportModal_<%= comment.id %>" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel_<%= comment.id %>" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content text-dark">
 
       <div class="modal-header">
         <h5 class="modal-title" id="reportModalLabel_<%= comment.id %>">通報する</h5>
@@ -21,10 +21,6 @@
 
           <%= f.submit "通報する", class: "btn btn-danger mt-3" %>
         <% end %>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
       </div>
 
     </div>

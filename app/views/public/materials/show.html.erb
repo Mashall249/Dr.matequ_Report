@@ -34,7 +34,7 @@
           <% if @material.user == current_user %>
             <%= link_to "編集する", edit_material_path(@material), class: "btn btn-outline-dark btn-sm me-2" %>
           <% elsif current_user && !Report.exists?(user_id: current_user.id, reportable: @material) %>
-            <%= link_to "通報する", new_material_report_path(@material), class: "btn btn-warning btn-sm me-2" %>
+            <%= link_to "通報する", "#reportModal_#{@material.id}", class: "btn btn-warning btn-sm me-2", data: { toggle: "modal" } %>
           <% else %>
             <span class="text-muted">通報済み</span>
           <% end %>
