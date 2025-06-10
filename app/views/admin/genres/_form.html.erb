@@ -1,4 +1,5 @@
-  <%= form_with model: genre, url: admin_genres_path, class: 'form-group' do |f| %>
+  <!-- namespace内でより推測しやすくするためにscope付与 -->
+  <%= form_with model: [:admin, genre], class: 'form-group' do |f| %>
     <%= f.label :name, "ジャンル名" %>
     <%= f.text_field :name, placeholder: 'ジャンル名', class: "form-control mt-3", style: "width:50%" %>
     <%= f.submit "登録する", class: 'btn btn-primary mt-3' %>

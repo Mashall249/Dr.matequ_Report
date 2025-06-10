@@ -6,15 +6,15 @@ class Public::UsersController < ApplicationController
     @materials = @user.materials
 
     if params[:status].present? && Material.statuses.key?(params[:status])
-      @materials = Material.public_send(params[:status]).page(params[:page]).per(10)
-    else
-      @materials = Material.page(params[:page]).per(10)
+      @materials = @materials.public_send(params[:status])
     end
 
+      @materials = @materials.page(params[:page]).per(10)
+
     @status_counts = {
-      pending: Material.pending.count,
-      approved: Material.approved.count,
-      rejected: Material.rejected.count
+      pending: @user.materials.pending.count,
+      approved: @user.materials.approved.count,
+      rejected: @user.materials.rejected.count
     }
 
     respond_to do |format|

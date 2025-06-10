@@ -14,8 +14,7 @@
   <body class="main-bg text-white">
     <%= render 'layouts/header' %>
 
-    <p class='text-light'><%= flash[:notice] %></p>
-    <p class='text-danger'><%= flash[:alert] %></p>
+    <%= render 'layouts/flash' %>
 
     <!-- 検索窓 -->
     <div class="d-flex justify-content-end mb-2">
