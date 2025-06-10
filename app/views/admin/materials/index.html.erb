@@ -1,19 +1,19 @@
 <div class="container mt-4">
   <h1 class="mb-4 text-center">全機器一覧</h1>
 
-    <!-- タブ切り替え -->
+    <!-- タブ切り替え(nilエラー回避) -->
     <ul class="nav nav-tabs mb-3">
       <li class="nav-item">
         <%= link_to "すべて", admin_materials_path, remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status].blank? ? 'active' : ''}" %>
       </li>
       <li class="nav-item">
-        <%= link_to "承認待ち (#{@status_counts[:pending]})", admin_materials_path(status: "pending"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'pending' ? 'active' : ''}" %>
+        <%= link_to "承認待ち (#{@status_counts[:pending] || 0})", admin_materials_path(status: "pending"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'pending' ? 'active' : ''}" %>
       </li>
       <li class="nav-item">
-        <%= link_to "承認済み (#{@status_counts[:approved]})", admin_materials_path(status: "approved"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'approved' ? 'active' : ''}" %>
+        <%= link_to "承認済み (#{@status_counts[:approved] || 0})", admin_materials_path(status: "approved"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'approved' ? 'active' : ''}" %>
       </li>
       <li class="nav-item">
-        <%= link_to "却下 (#{@status_counts[:rejected]})", admin_materials_path(status: "rejected"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'rejected' ? 'active' : ''}" %>
+        <%= link_to "却下 (#{@status_counts[:rejected] || 0})", admin_materials_path(status: "rejected"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'rejected' ? 'active' : ''}" %>
       </li>
     </ul>
 

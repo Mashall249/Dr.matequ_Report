@@ -9,12 +9,9 @@ class Admin::MaterialsController < ApplicationController
       @materials = Material.page(params[:page]).per(10)
     end
 
-    # カウント（全ステータス）
-    @status_counts = {
-      pending: Material.pending.count,
-      approved: Material.approved.count,
-      rejected: Material.rejected.count
-    }
+    # すべてのステータスの数をまとめて取得＋デフォルト0を設定
+    @status_counts = Material.group(:status).count.with_indifferent_access
+    @status_counts.default = 0
 
     respond_to do |format|
       format.html # 通常のブラウザリクエストに対して
