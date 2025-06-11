@@ -1,4 +1,10 @@
 function initializeStarRatings() {
+  // 画像パスは専用タグから一度だけ取得
+  const starPathsElem = document.getElementById('star-image-paths');
+  const starOnPath = starPathsElem?.dataset.starOn || '/assets/star-on.png';
+  const starOffPath = starPathsElem?.dataset.starOff || '/assets/star-off.png';
+  const starHalfPath = starPathsElem?.dataset.starHalf || '/assets/star-half.png';
+
   // 平均点表示
   document.querySelectorAll('.avg-star-rating').forEach(elem => {
     const score = elem.dataset.score;
@@ -6,9 +12,9 @@ function initializeStarRatings() {
     elem.dataset.ratyInitialized = true;
 
     raty(elem, {
-      starOn: elem.dataset.starOn || '/assets/star-on.png',
-      starOff: elem.dataset.starOff || '/assets/star-off.png',
-      starHalf: elem.dataset.starHalf || '/assets/star-half.png',
+      starOn: starOnPath,
+      starOff: starOffPath,
+      starHalf: starHalfPath,
       score: parseFloat(score),
       readOnly: true
     });
@@ -21,9 +27,9 @@ function initializeStarRatings() {
     elem.dataset.ratyInitialized = true;
 
     raty(elem, {
-      starOn: elem.dataset.starOn || '/assets/star-on.png',
-      starOff: elem.dataset.starOff || '/assets/star-off.png',
-      starHalf: elem.dataset.starHalf || '/assets/star-half.png',
+      starOn: starOnPath,
+      starOff: starOffPath,
+      starHalf: starHalfPath,
       scoreName: name
     });
   });
@@ -35,9 +41,9 @@ function initializeStarRatings() {
     elem.dataset.ratyInitialized = true;
 
     raty(elem, {
-      starOn: elem.dataset.starOn || '/assets/star-on.png',
-      starOff: elem.dataset.starOff || '/assets/star-off.png',
-      starHalf: elem.dataset.starHalf || '/assets/star-half.png',
+      starOn: starOnPath,
+      starOff: starOffPath,
+      starHalf: starHalfPath,
       score: parseFloat(score),
       readOnly: true
     });
@@ -48,6 +54,4 @@ function initializeStarRatings() {
 document.addEventListener('turbolinks:load', initializeStarRatings);
 
 // Ajaxで一部更新されたとき
-document.addEventListener('ajax:success', function() {
-  initializeStarRatings();
-});
+document.addEventListener('ajax:success', initializeStarRatings);
