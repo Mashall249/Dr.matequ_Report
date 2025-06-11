@@ -48,3 +48,11 @@ document.addEventListener('turbolinks:load', function () {
     });
   });
 });
+
+// 通常のページ読み込み時
+document.addEventListener('turbolinks:load', initializeStarRatings);
+
+// Ajaxで一部更新されたとき
+document.addEventListener('ajax:success', function() {
+  initializeStarRatings();
+});
