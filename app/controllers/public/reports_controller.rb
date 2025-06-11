@@ -19,8 +19,8 @@ class Public::ReportsController < ApplicationController
 
   #投稿orコメント、どちらの通報なのかを判別して該当レコードを取り出すメソッド
   def find_reportable
-    if params[:review_id]
-      Review.find(params[:review_id])
+    if params[:material_id]
+      Material.find(params[:material_id])
     elsif params[:comment_id]
       Comment.find(params[:comment_id])
     else
