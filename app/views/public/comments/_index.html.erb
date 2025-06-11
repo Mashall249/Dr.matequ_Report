@@ -18,7 +18,7 @@
       <!-- 削除/通報/通報済みボタン -->
       <% if user_signed_in? %>
         <% if comment.user == current_user %>
-          <%= link_to "削除する", material_comment_path(comment.material, comment), method: :delete, class: "btn btn-danger btn-sm" %>
+          <%= button_to "削除する", material_comment_path(comment.material, comment), method: :delete, class: "btn btn-danger btn-sm" %>
         <% elsif current_user && !Report.exists?(user_id: current_user.id, reportable: comment) %>
           <%= link_to "通報する", "#reportModal_#{comment.id}", class: "btn btn-warning btn-sm", data: { toggle: "modal" } %>
         <% else %>
