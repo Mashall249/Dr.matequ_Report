@@ -67,7 +67,7 @@ class Public::MaterialsController < ApplicationController
    #ペナルティ処理
    def check_penalty
     #期間制限
-    if current_user.penalty_until.present? && current_user.penalty_until > Time.current_user
+    if current_user.penalty_until.present? && current_user.penalty_until > Time.current
       redirect_to users_mypage_path, alert: "現在、#{current_user.penalty_until.strftime('%Y-%m-%d %H:%M')}まで投稿が制限されています。"
     #回数制限(上限を超えると退会処理)
     elsif current_user.penalty_count >= 3
