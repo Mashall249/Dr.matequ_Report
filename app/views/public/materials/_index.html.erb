@@ -1,4 +1,12 @@
 <div class="row g-3">
+
+  <!-- 星画像のURLを渡すための専用タグ -->
+  <div id="star-image-paths"
+    data-star-on="<%= asset_path('star-on.png') %>"
+    data-star-off="<%= asset_path('star-off.png') %>"
+    data-star-half="<%= asset_path('star-half.png') %>">
+  </div>
+
   <% materials.each do |material| %>
     <div class="col-md-6 col-lg-4">
       <div class="card h-100 bg-body text-dark border-0 shadow-sm">
