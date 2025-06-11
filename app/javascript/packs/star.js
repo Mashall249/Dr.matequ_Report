@@ -1,13 +1,21 @@
 document.addEventListener('turbolinks:load', function () {
+  const starPathsElem = document.getElementById('star-image-paths');
+  if (!starPathsElem) return;
+
+  //URLを渡すための架け橋
+  const starOn = starPathsElem.dataset.starOn;
+  const starOff = starPathsElem.dataset.starOff;
+  const starHalf = starPathsElem.dataset.starHalf;
+
   // 平均点表示用（読み取り専用）
   document.querySelectorAll('.avg-star-rating').forEach(elem => {
     const score = elem.dataset.score;
     if (!score) return;
 
     raty(elem, {
-      starOn: '/assets/star-on.png',
-      starOff: '/assets/star-off.png',
-      starHalf: '/assets/star-half.png',
+      starOn: starOn,
+      starOff: starOff,
+      starHalf: starHalf,
       score: parseFloat(score),
       readOnly: true
     });
@@ -19,9 +27,9 @@ document.addEventListener('turbolinks:load', function () {
     if (!name) return;
 
     raty(elem, {
-      starOn: '/assets/star-on.png',
-      starOff: '/assets/star-off.png',
-      starHalf: '/assets/star-half.png',
+      starOn: starOn,
+      starOff: starOff,
+      starHalf: starHalf,
       scoreName: name
     });
   });
@@ -32,9 +40,9 @@ document.addEventListener('turbolinks:load', function () {
     if (!score) return;
 
     raty(elem, {
-      starOn: '/assets/star-on.png',
-      starOff: '/assets/star-off.png',
-      starHalf: '/assets/star-half.png',
+      starOn: starOn,
+      starOff: starOff,
+      starHalf: starHalf,
       score: parseFloat(score),
       readOnly: true
     });
