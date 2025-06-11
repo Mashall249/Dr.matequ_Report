@@ -1,13 +1,6 @@
 <div class="container mt-4">
   <h1 class="mb-4 text-center">コメント投稿</h1>
 
-  <!-- 星画像のURLを渡すための専用タグ -->
-  <div id="star-image-paths"
-    data-star-on="<%= asset_path('star-on.png') %>"
-    data-star-off="<%= asset_path('star-off.png') %>"
-    data-star-half="<%= asset_path('star-half.png') %>">
-  </div>
-
   <%= form_with model: [@material, @comment], local: true do |f| %>
     <div class="form-group">
       <%= f.label "良いポイント" %>

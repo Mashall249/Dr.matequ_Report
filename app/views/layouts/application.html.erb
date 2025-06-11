@@ -21,6 +21,13 @@
       <%= render 'public/searches/form', q: @q %>
     </div>
 
+    <!-- 星画像のURLを渡すための専用タグ -->
+    <div id="star-image-paths"
+      data-star-on="<%= asset_path('star-on.png') %>"
+      data-star-off="<%= asset_path('star-off.png') %>"
+      data-star-half="<%= asset_path('star-half.png') %>">
+    </div>
+
     <%= yield %>
 
     <%= render 'layouts/footer' %>

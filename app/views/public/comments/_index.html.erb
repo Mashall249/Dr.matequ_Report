@@ -1,13 +1,6 @@
 <div class="bg-light rounded border border-success p-3 text-dark">
   <h4 class="my-2">コメント・レビュー一覧</h4>
 
-  <!-- 星画像のURLを渡すための専用タグ -->
-  <div id="star-image-paths"
-    data-star-on="<%= asset_path('star-on.png') %>"
-    data-star-off="<%= asset_path('star-off.png') %>"
-    data-star-half="<%= asset_path('star-half.png') %>">
-  </div>
-
   <% comments.each do |comment| %>
     <div class="border-bottom py-2 m-4">
       <h5 class="font-weight-bold mb-2"><%= comment.user.nickname %></h5>
