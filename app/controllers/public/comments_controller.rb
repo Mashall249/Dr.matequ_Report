@@ -30,8 +30,13 @@ class Public::CommentsController < ApplicationController
   end
 
   def destroy
-    Comment.find(params[:id]).destroy
-    redirect_to material_path(params[:material_id])
+    comment = Comment.find(params[:id])
+  
+    # 通知も削除（ポリモーフィックで）
+    Notification.where(notifiable: comment).destroy_all
+
+    comment.destroy
+    redirect_to material_path(params[:material_id]), notice: "コメントを削除しました。"
   end
 
   private

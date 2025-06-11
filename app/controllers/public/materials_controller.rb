@@ -54,6 +54,7 @@ class Public::MaterialsController < ApplicationController
 
   def destroy
     @material = Material.find(params[:id])
+    Notification.where(notifiable: material).destroy_all
     @material.destroy
     redirect_to materials_path
   end
