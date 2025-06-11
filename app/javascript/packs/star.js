@@ -1,53 +1,48 @@
-document.addEventListener('turbolinks:load', function () {
-  const starPathsElem = document.getElementById('star-image-paths');
-  if (!starPathsElem) return;
-
-  //URLを渡すための架け橋
-  const starOn = starPathsElem.dataset.starOn;
-  const starOff = starPathsElem.dataset.starOff;
-  const starHalf = starPathsElem.dataset.starHalf;
-
-  // 平均点表示用（読み取り専用）
+function initializeStarRatings() {
+  // 平均点表示
   document.querySelectorAll('.avg-star-rating').forEach(elem => {
     const score = elem.dataset.score;
-    if (!score) return;
+    if (!score || elem.dataset.ratyInitialized) return;
+    elem.dataset.ratyInitialized = true;
 
     raty(elem, {
-      starOn: starOn,
-      starOff: starOff,
-      starHalf: starHalf,
+      starOn: elem.dataset.starOn || '/assets/star-on.png',
+      starOff: elem.dataset.starOff || '/assets/star-off.png',
+      starHalf: elem.dataset.starHalf || '/assets/star-half.png',
       score: parseFloat(score),
       readOnly: true
     });
   });
 
-  // 投稿用（スコア送信）
+  // 投稿用（スコア送信用）
   document.querySelectorAll('.post-star-rating').forEach(elem => {
     const name = elem.dataset.name;
-    if (!name) return;
+    if (!name || elem.dataset.ratyInitialized) return;
+    elem.dataset.ratyInitialized = true;
 
     raty(elem, {
-      starOn: starOn,
-      starOff: starOff,
-      starHalf: starHalf,
+      starOn: elem.dataset.starOn || '/assets/star-on.png',
+      starOff: elem.dataset.starOff || '/assets/star-off.png',
+      starHalf: elem.dataset.starHalf || '/assets/star-half.png',
       scoreName: name
     });
   });
 
-  // コメントごとの評価表示（読み取り専用）
+  // コメント用
   document.querySelectorAll('.comment-star-rating').forEach(elem => {
     const score = elem.dataset.score;
-    if (!score) return;
+    if (!score || elem.dataset.ratyInitialized) return;
+    elem.dataset.ratyInitialized = true;
 
     raty(elem, {
-      starOn: starOn,
-      starOff: starOff,
-      starHalf: starHalf,
+      starOn: elem.dataset.starOn || '/assets/star-on.png',
+      starOff: elem.dataset.starOff || '/assets/star-off.png',
+      starHalf: elem.dataset.starHalf || '/assets/star-half.png',
       score: parseFloat(score),
       readOnly: true
     });
   });
-});
+}
 
 // 通常のページ読み込み時
 document.addEventListener('turbolinks:load', initializeStarRatings);
