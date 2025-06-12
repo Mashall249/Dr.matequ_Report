@@ -3,6 +3,15 @@
   <% materials.each do |material| %>
     <div class="col-md-6 col-lg-4">
       <div class="card h-100 bg-body text-dark border-0 shadow-sm">
+
+      <% if user_signed_in? %>
+        <div style="position: absolute; top: 0; right: 10px; z-index: 10;" class="d-flex">
+          <div id="bookmark_btn_<%= material.id %>">
+            <%= render "public/bookmarks/btn", material: material %>
+          </div>
+        </div>
+      <% end %>
+
         <div class="card-body d-flex flex-column">
           <div class="text-center mb-3">
             <%= image_tag material.get_image(80, 80), class: "rounded" %>

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
     resources :materials do
       resource :favorite, only: [:create, :destroy]
+      resource :bookmark, only: [:create, :destroy]
       resources :reports, only: [:new, :create]
       resources :comments, only: [:new, :create, :destroy] do
         resources :reports, only: [:new, :create]

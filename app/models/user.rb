@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :reports, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   validates :name, presence: true
   validates :nickname, presence: true, uniqueness: true

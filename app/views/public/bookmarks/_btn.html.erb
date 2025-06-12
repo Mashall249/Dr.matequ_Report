@@ -1,0 +1,15 @@
+<% if user_signed_in? %>
+  <% if material.bookmarked_by?(current_user) %>
+    <p>
+      <%= link_to material_bookmark_path(material), method: :delete, remote: true do %>
+        <i class="fa-solid fa-bookmark" aria-hidden="true" style="color: orange;"></i>
+      <% end %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to material_bookmark_path(material), method: :post, remote: true do %>
+        <i class="fa-solid fa-bookmark" aria-hidden="true" style="color: gray;"></i>
+      <% end %>
+    </p>
+  <% end %>
+<% end %>
