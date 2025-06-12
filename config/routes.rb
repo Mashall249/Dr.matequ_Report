@@ -30,6 +30,11 @@ Rails.application.routes.draw do
       resources :comments, only: [:new, :create, :destroy] do
         resources :reports, only: [:new, :create]
       end
+
+      #比較用ルーティング
+      collection do
+        get 'compare'
+      end
     end
 
     resources :genres, only: [:show]

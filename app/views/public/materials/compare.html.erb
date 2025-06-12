@@ -1,0 +1,94 @@
+<div class="container mt-4">
+  <h1 class="mb-4 text-center">比較結果</h1>
+
+  <div class="table-responsive">
+    <table class="table table-bordered text-center align-middle">
+
+      <thead class="table-light">
+        <tr>
+          <th>項目</th>
+          <% @materials.each do |material| %>
+            <th><%= material.name %></th>
+          <% end %>
+        </tr>
+      </thead>
+
+      <tbody>
+      
+        <tr>
+          <td>ジャンル</td>
+          <% @materials.each do |m| %>
+            <td><%= m.genre.name %></td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <td>本文</td>
+          <% @materials.each do |m| %>
+            <!-- truncateで文字列を省略 -->
+            <td><%= truncate(m.body, length: 100) %></td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <td>平均評価</td>
+          <% @materials.each do |m| %>
+            <td>
+            <% avg = m.comments.average(:star) %>
+            <% if avg.present? %>
+              <div class="avg-star-rating" data-score="<%= avg.to_f.round(1) %>"></div>
+              <p class="small text-muted mb-0"><%= avg.to_f.round(1) %> / 5</p>
+            <% else %>
+              <p class="small text-muted mb-0">評価なし</p>
+            <% end %>
+            </td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <td>良い点</td>
+          <% @materials.each do |m| %>
+            <td>
+              <% if m.comments.any? %>
+                <ul class="text-start small">
+                  <% m.comments.each do |c| %>
+                    <li><%= truncate(c.good_comment, length: 60) %></li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <span class="text-muted">コメントなし</span>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <td>悪い点</td>
+          <% @materials.each do |m| %>
+            <td>
+              <% if m.comments.any? %>
+                <ul class="text-start small">
+                  <% m.comments.each do |c| %>
+                    <li><%= truncate(c.bad_comment, length: 60) %></li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <span class="text-muted">コメントなし</span>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <%= link_to '投稿一覧に戻る', materials_path, class: 'btn btn-secondary mt-3' %>
+</div>
+
+<!-- 選択状態を自動で消す -->
+<script>
+  document.addEventListener("turbolinks:load", function () {
+    localStorage.removeItem("compare_ids");
+  });
+</script>

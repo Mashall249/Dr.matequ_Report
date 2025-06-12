@@ -6,6 +6,7 @@ class Material < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :reports, as: :reportable, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   has_one_attached :image
 
@@ -31,6 +32,10 @@ class Material < ApplicationRecord
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
+  end
+
+  def bookmarked_by?(user)
+    bookmarks.exists?(user_id: user.id)
   end
 
   def get_image(width, height)

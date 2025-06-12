@@ -1,2 +1,2 @@
 // BMボタンの更新
-$("#bookmark_btn_<%= @material.id %>").html("<%= j(render 'public/bookmarks/btn', material: @material) %>");
+$(".bookmark-btn[data-material-id='<%= @material.id %>']").html("<%= j(render partial: 'public/bookmarks/btn', locals: { material: @material }) %>");

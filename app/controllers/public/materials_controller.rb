@@ -59,6 +59,17 @@ class Public::MaterialsController < ApplicationController
     redirect_to materials_path
   end
 
+  def compare
+    ids = params[:ids]
+    if ids.blank?
+      redirect_to materials_path, alert: "比較する投稿を選んでください"
+      return
+    end
+
+    #最初にまとめて必要な関連情報を取得し、一覧に含まれる投稿だけを取得
+    @materials = Material.includes(:genre, :comments).where(id: ids)
+  end
+
   private
    def material_params
     params.require(:material).permit(:name, :body, :url, :status, :image, :genre_id)

@@ -25,6 +25,7 @@ window.raty = function(elem,opt) {
 import './preview.js';
 import './star.js';
 import './slidebar.js';
+import './compare.js';
 
 Rails.start()
 Turbolinks.start()
