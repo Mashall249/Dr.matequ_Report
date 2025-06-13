@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h1 class="mb-4 text-center">アクセスログ一覧</h1>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>レビュー</th>
+        <th>ユーザー</th>
+        <th>滞在秒数</th>
+        <th>日時</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @logs.each do |log| %>
+        <tr>
+          <td><%= log.id %></td>
+          <td><%= link_to "レビュー#{log.review_id}", review_path(log.review_id) %></td>
+          <td><%= log.user&.name || "ゲスト(#{log.session_id})" %></td>
+          <td><%= log.stay_time %> 秒</td>
+          <td><%= log.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

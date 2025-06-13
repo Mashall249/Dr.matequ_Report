@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   get '/about' => 'homes#about', as: 'about'
 
+  resources :access_logs, only: [:create]
+
   #ユーザー用ルート
   scope module: :public do
     get '/users/mypage' => 'users#mypage'
@@ -49,6 +51,7 @@ Rails.application.routes.draw do
     resources :materials, only: [:index, :show, :edit, :update, :destroy] do
       resources :comments, only: [:destroy]
     end
+    resources :access_logs, only: [:index]
   end
 
 end

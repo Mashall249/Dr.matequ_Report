@@ -93,3 +93,6 @@
 <% @material.comments.each do |comment| %>
   <%= render 'public/reports/report_comment', material: @material, comment: comment %>
 <% end %>
+
+<!-- アクセスログ集積 -->
+<div id="review-log-data" data-review-id="<%= @review.id %>"></div>

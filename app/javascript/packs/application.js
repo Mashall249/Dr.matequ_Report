@@ -26,6 +26,7 @@ import './preview.js';
 import './star.js';
 import './slidebar.js';
 import './compare.js';
+import './access_log.js';
 
 Rails.start()
 Turbolinks.start()

@@ -32,6 +32,9 @@ class Public::MaterialsController < ApplicationController
   def show
     @material = Material.find(params[:id])
 
+    #ページ滞在時間の記録
+    session[:view_start_time] = Time.current
+
     #グラフを算出するための定義(ハッシュに変換)
     @star_counts = (1..5).map do |i|
       [i, @material.comments.where(star: i).count]
