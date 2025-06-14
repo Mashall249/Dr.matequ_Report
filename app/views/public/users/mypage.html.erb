@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <!-- 自分の投稿一覧 -->
+      <!-- 自分の使用・BM一覧 -->
       <div class="m-5">
         <h4 class="mb-3 text-white">お気に入り一覧</h4>
         <!-- ユーザーのお気に入り取得 + N+1問題回避(includes) + Favoriteに関連づいたMaterialの取り出し(map) -->
@@ -53,7 +53,7 @@
 
       <!-- コメント一覧 -->
       <div class="m-5">
-        <%= render 'public/comments/index', comments: @user.materials.includes(:comments).map(&:comments).flatten %>
+        <%= render 'public/comments/mypage_index', comments: @user.comments.includes(:material) %>
       </div>
     </div>
 </div>
