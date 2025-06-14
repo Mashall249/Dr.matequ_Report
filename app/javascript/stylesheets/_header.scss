@@ -10,3 +10,50 @@
     }
   }
 }
+
+/* スライドメニュー */
+#slideMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #2E2930;
+  color: #ffffff;
+  z-index: 1050;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  padding: 1rem;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+
+  display: flex;
+  flex-direction: column;
+
+  a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-bottom: 1rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  #menuClose {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      color: #cccccc;
+    }
+  }
+
+  &.active {
+    transform: translateX(0);
+  }
+}

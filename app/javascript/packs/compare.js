@@ -27,25 +27,29 @@ document.addEventListener("turbolinks:load", function () {
         button.textContent = "選択中";
       }
 
-      //保存
+      // 保存
       localStorage.setItem("compare_ids", JSON.stringify([...selectedIds]));
 
-      //比較ボタンの有効/無効更新
-      if (!compareBtn) {
-      compareBtn.disabled = selectedIds.size === 0;
+      // 比較ボタンの有効/無効更新（存在チェックを追加）
+      if (compareBtn) {
+        compareBtn.disabled = selectedIds.size < 2;
       }
     });
   });
 
-  //ページ読み込み時点でボタン状態を更新
-  compareBtn.disabled = selectedIds.size === 0;
+  // ページ読み込み時点でボタン状態を更新
+  if (compareBtn) {
+    compareBtn.disabled = selectedIds.size < 2;
+  }
 
-  //比較ボタン押下時：URL生成
-  compareBtn.addEventListener("click", () => {
-    if (selectedIds.size > 0) {
-      const query = Array.from(selectedIds).map(id => `ids[]=${id}`).join("&");
-      localStorage.removeItem("compare_ids");
-      window.location.href = `/materials/compare?${query}`;
-    }
-  });
+  // 比較ボタン押下時：URL生成
+  if (compareBtn) {
+    compareBtn.addEventListener("click", () => {
+      if (selectedIds.size >= 2) {
+        const query = Array.from(selectedIds).map(id => `ids[]=${id}`).join("&");
+        localStorage.removeItem("compare_ids");
+        window.location.href = `/materials/compare?${query}`;
+      }
+    });
+  }
 });

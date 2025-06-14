@@ -41,9 +41,11 @@
 
           <div class="mt-auto text-center">
             <%= link_to "詳細を見る", material_path(material), class: "btn btn-outline-secondary btn-sm" %>
-            <button class="btn btn-outline-primary compare-toggle" data-id="<%= material.id %>">
-              比較に追加
-            </button>
+            <% if user_signed_in? %>
+              <button class="btn btn-outline-primary btn-sm compare-toggle" data-id="<%= material.id %>">
+                比較に追加
+              </button>
+            <% end %>
           </div>
         </div>
       </div>

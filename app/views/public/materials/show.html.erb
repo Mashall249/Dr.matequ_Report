@@ -1,90 +1,92 @@
-<div class="bg-light rounded container py-4">
+<div class="container mt-4">
+  <div class="bg-light rounded container py-4">
 
-  <!-- 上部：画像＋タイトル＋評価＋アクション -->
-  <div class="row mb-4 p-3">
-    <div class="col-md-4 text-center">
-      <%= image_tag @material.get_image(200, 200), class: "img-fluid rounded border" %>
-    </div>
-
-    <div class="col-md-8 position-relative">
-
-      <!-- アクションボタン 右上配置 -->
-      <% if user_signed_in? %>
-        <div style="position: absolute; top: 0; right: 40px; z-index: 10;" class="d-flex">
-          <div id="favorite_btn_<%= @material.id %>">
-            <%= render "public/favorites/btn", material: @material %>
-          </div>
-          <div id="bookmark_btn_<%= @material.id %>">
-            <%= render "public/bookmarks/btn", material: @material %>
-          </div>
-        </div>
-      <% end %>
-
-      <!-- タイトル＋ジャンル -->
-      <h2 class="text-dark"><%= @material.name %></h2>
-      <p class="text-muted"><%= @material.genre.name %></p>
-
-      <!-- 平均評価 -->
-      <div class="d-flex align-items-center gap-3 my-2">
-        <% avg = @material.comments.average(:star) %>
-        <div class="avg-star-rating" data-score="<%= avg.to_f.round(1) %>"></div>
-        <span class="text-warning mx-3 font-weight-bold"><%= avg.to_f.round(1) %></span>
+    <!-- 上部：画像＋タイトル＋評価＋アクション -->
+    <div class="row mb-4 p-3">
+      <div class="col-md-4 text-center">
+        <%= image_tag @material.get_image(200, 200), class: "img-fluid rounded border" %>
       </div>
 
-      <!-- 編集 / 通報 / 通報済みボタン -->
-      <% if user_signed_in? %>
-        <div class="mb-2">
-          <% if @material.user == current_user %>
-            <%= link_to "編集する", edit_material_path(@material), class: "btn btn-outline-dark btn-sm me-2" %>
-          <% elsif current_user && !Report.exists?(user_id: current_user.id, reportable: @material) %>
-            <%= link_to "通報する", "#reportModal_#{@material.id}", class: "btn btn-warning btn-sm me-2", data: { toggle: "modal" } %>
-          <% else %>
-            <span class="text-muted">通報済み</span>
-          <% end %>
+      <div class="col-md-8 position-relative">
 
-          <!-- コメントボタン -->
-          <%= link_to "コメント/レビューする", new_material_comment_path(@material), class: "btn btn-primary btn-sm" %>
-        </div>
-      <% end %>
-
-      <!-- いいね数・コメント数 -->
-      <div class="mt-2 text-dark">
-        <%= render "public/materials/meta_counts", material: @material %>
-      </div>
-    </div>
-  </div>
-
-  <!-- 特徴・リンク -->
-  <div class="bg-secondary rounded p-3 mb-4 text-light">
-    <h4>特徴</h4>
-    <p><%= @material.body %></p>
-
-    <% if @material.url.present? %>
-      <p class="external-link">
-        外部リンク：<%= Rinku.auto_link(@material.url, :all, 'target="_blank"').html_safe %>
-      </p>
-    <% end %>
-  </div>
-
-  <!-- 評価グラフ表示 -->
-      <div class="rating-distribution my-4">
-        <% (1..5).reverse_each do |i| %>
-          <div class="d-flex align-items-center mb-1 text-dark">
-            <div class="me-2" style="width: 60px;">星<%= i %></div>
-
-            <!-- 横棒グラフ表示 -->
-            <div class="progress" style="width: 25%; height: 18px;">
-              <div class="progress-bar bg-warning" role="progressbar"
-                  style="width: <%= (@star_counts[i].to_f / @material.comments.count * 100).round(1) %>%;">
-                <%= @star_counts[i] %>件
-              </div>
+        <!-- アクションボタン 右上配置 -->
+        <% if user_signed_in? %>
+          <div style="position: absolute; top: 0; right: 40px; z-index: 10;" class="d-flex">
+            <div id="favorite_btn_<%= @material.id %>" class="mx-3">
+              <%= render "public/favorites/btn", material: @material %>
+            </div>
+            <div id="bookmark_btn_<%= @material.id %>">
+              <%= render "public/bookmarks/btn", material: @material %>
             </div>
           </div>
         <% end %>
-      </div>
 
-  <!-- コメント -->
-  <%= render 'public/comments/index', comments: @material.comments %>
+        <!-- タイトル＋ジャンル -->
+        <h2 class="text-dark"><%= @material.name %></h2>
+        <p class="text-muted"><%= @material.genre.name %></p>
+
+        <!-- 平均評価 -->
+        <div class="d-flex align-items-center gap-3 my-2">
+          <% avg = @material.comments.average(:star) %>
+          <div class="avg-star-rating" data-score="<%= avg.to_f.round(1) %>"></div>
+          <span class="text-warning mx-3 font-weight-bold"><%= avg.to_f.round(1) %></span>
+        </div>
+
+        <!-- 編集 / 通報 / 通報済みボタン -->
+        <% if user_signed_in? %>
+          <div class="mb-2">
+            <% if @material.user == current_user %>
+              <%= link_to "編集する", edit_material_path(@material), class: "btn btn-outline-dark btn-sm me-2" %>
+            <% elsif current_user && !Report.exists?(user_id: current_user.id, reportable: @material) %>
+              <%= link_to "通報する", "#reportModal_#{@material.id}", class: "btn btn-warning btn-sm me-2", data: { toggle: "modal" } %>
+            <% else %>
+              <span class="text-muted">通報済み</span>
+            <% end %>
+
+            <!-- コメントボタン -->
+            <%= link_to "コメント/レビューする", new_material_comment_path(@material), class: "btn btn-primary btn-sm" %>
+          </div>
+        <% end %>
+
+        <!-- いいね数・コメント数 -->
+        <div class="mt-2 text-dark">
+          <%= render "public/materials/meta_counts", material: @material %>
+        </div>
+      </div>
+    </div>
+
+    <!-- 特徴・リンク -->
+    <div class="bg-secondary rounded p-3 mb-4 text-light">
+      <h4>特徴</h4>
+      <p><%= @material.body %></p>
+
+      <% if @material.url.present? %>
+        <p class="external-link">
+          外部リンク：<%= Rinku.auto_link(@material.url, :all, 'target="_blank"').html_safe %>
+        </p>
+      <% end %>
+    </div>
+
+    <!-- 評価グラフ表示 -->
+        <div class="rating-distribution my-4">
+          <% (1..5).reverse_each do |i| %>
+            <div class="d-flex align-items-center mb-1 text-dark">
+              <div class="me-2" style="width: 60px;">星<%= i %></div>
+
+              <!-- 横棒グラフ表示 -->
+              <div class="progress" style="width: 25%; height: 18px;">
+                <div class="progress-bar bg-warning" role="progressbar"
+                    style="width: <%= (@star_counts[i].to_f / @material.comments.count * 100).round(1) %>%;">
+                  <%= @star_counts[i] %>件
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+    <!-- コメント -->
+    <%= render 'public/comments/index', comments: @material.comments %>
+  </div>
 </div>
 
 <!-- 通報用モーダル -->
@@ -95,4 +97,4 @@
 <% end %>
 
 <!-- アクセスログ集積 -->
-<div id="review-log-data" data-review-id="<%= @review.id %>"></div>
+<div id="review-log-data" data-material-id="<%= @material.id %>"></div>

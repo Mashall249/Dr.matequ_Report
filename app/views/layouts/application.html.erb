@@ -11,15 +11,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="main-bg text-white">
+  <body class="main-bg text-white" data-user-signed-in="<%= user_signed_in? %>">
     <%= render 'layouts/header' %>
 
     <%= render 'layouts/flash' %>
-
-    <!-- 検索窓 -->
-    <div class="d-flex justify-content-end mb-2">
-      <%= render 'public/searches/form', q: @q %>
-    </div>
 
     <!-- 星画像のURLを渡すための専用タグ -->
     <div id="star-image-paths"

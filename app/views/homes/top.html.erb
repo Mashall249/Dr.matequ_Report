@@ -1,7 +1,26 @@
 <div class="container text-center mt-4">
-  <h1 class="mb-4">Top</h1>
+  <section class="top-register-section py-4">
+    <div class="container">
+      <div class="card mx-auto shadow p-4 text-dark" style="max-width: 500px;" id="registerPromptCard">
+        <h3 class="card-title">レビューを投稿してみませんか？</h3>
+        <p class="card-text">あなたの投稿やコメントが、誰かのヒントになるかも。</p>
+        <%= link_to "登録する", new_user_registration_path, class: "btn btn-primary mt-2", id: "registerBtn" %>
+        <button class="btn btn-dark ms-2" id="declineBtn">拒否する</button>
+      </div>
+    </div>
 
-<%= link_to "新規登録", new_user_registration_path, class: "top-register-btn btn btn-primary" %>
+    <div id="dialogueContainer" class="dialogue-container mt-4" style="display: none;">
+    <div class="dialogue-inner d-flex align-items-start">
+      <div class="char-img">
+        <%= image_tag("character.png", class: "img-fluid") %>
+      </div>
+      <div class="dialogue-box ms-3">
+        <div id="typedText" class="dialogue-text"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  </section>
 
   <section class="top-material-section py-5">
     <div class="container">

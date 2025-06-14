@@ -1,6 +1,7 @@
 .search-form {
   max-width: 400px;
-  margin: 0 auto;
+  margin-left: auto; // 右寄せ
+  margin-right: 0;
 }
 
 .search-input {

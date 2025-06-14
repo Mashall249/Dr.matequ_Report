@@ -2,13 +2,13 @@
   <% if material.favorited_by?(current_user) %>
     <p>
       <%= link_to material_favorite_path(material), method: :delete, remote: true do %>
-        <i class="fa-regular fa-circle-check" aria-hidden="true" style="color: green;"> 使った</i>
+        <i class="fa-regular fa-circle-check" aria-hidden="true" style="color: green; font-size: 24px"></i>
       <% end %>
     </p>
   <% else %>
     <p>
       <%= link_to material_favorite_path(material), method: :post, remote: true do %>
-        <i class="fa-regular fa-circle-check" aria-hidden="true" style="color: gray;"> 使った</i>
+        <i class="fa-regular fa-circle-check" aria-hidden="true" style="color: gray; font-size: 24px"></i>
       <% end %>
     </p>
   <% end %>
