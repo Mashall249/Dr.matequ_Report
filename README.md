@@ -19,7 +19,10 @@
 
 ​
 ## 設計書
-後ほど作成予定
+- E-R: https://drive.google.com/file/d/1GgeK5bXEP2blOPC_ERYFjREpvmKG35C5/view?usp=sharing
+- UIFlow: https://drive.google.com/file/d/1wkw0sVl9i-F_islPrYBayfsLSKQzmDIt/view?usp=sharing
+- テーブル定義書: https://docs.google.com/spreadsheets/d/1gwSQiTn5a4y5NlykBKhxw5gEXI_wj5C7DXN-5oYOI20/edit?usp=sharing
+- アプリケーション詳細設計書: https://docs.google.com/spreadsheets/d/1YVLoA4ZLD1_EXTjX5yl6tDSPjVkYC6r7Y9I_WTRmHNc/edit?usp=sharing
 ​
 ## 開発環境
 - OS：Linux(CentOS)
@@ -28,4 +31,5 @@
 - JSライブラリ：jQuery
 - IDE：Cloud9
 ​
-## 使用素材
+## 画像作成
+- Canva
