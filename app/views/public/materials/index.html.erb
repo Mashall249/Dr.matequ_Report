@@ -1,11 +1,13 @@
 <div class="container mt-4">
   <h1 class="mb-4 text-center">全機器一覧</h1>
 
-  <div class="mt-3">
-    <button class="btn btn-info" id="go-to-compare" disabled>
-      選択した投稿を比較する
-    </button>
-  </div>
+  <% if user_signed_in? %>
+    <div class="mt-3">
+      <button class="btn btn-info" id="go-to-compare" disabled>
+        選択した投稿を比較する
+      </button>
+    </div>
+  <% end %>
 
   <%= render 'public/materials/index', materials: @materials %>
   <%= paginate @materials %>

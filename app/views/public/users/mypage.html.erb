@@ -18,42 +18,42 @@
       </div>
     </div>
 
-      <!-- 自分の投稿一覧 -->
-      <div class="m-5">
-        <h4 class="mb-3 text-white">自分の登録した機器一覧</h4>
-        <%= link_to "新規投稿する", new_material_path, class: "btn btn-secondary" %>
+    <!-- 自分の投稿一覧 -->
+    <div class="m-5">
+      <h4 class="mb-3 text-white">自分の登録した機器一覧</h4>
+      <%= link_to "新規投稿する", new_material_path, class: "btn btn-secondary" %>
 
-        <!-- タブ切り替え -->
-        <ul class="nav nav-tabs mb-3">
-          <li class="nav-item">
-            <%= link_to "すべて", users_mypage_path, remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status].blank? ? 'active' : ''}" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "承認待ち (#{@status_counts[:pending]})", users_mypage_path(status: "pending"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'pending' ? 'active' : ''}" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "承認済み (#{@status_counts[:approved]})", users_mypage_path(status: "approved"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'approved' ? 'active' : ''}" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "却下 (#{@status_counts[:rejected]})", users_mypage_path(status: "rejected"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'rejected' ? 'active' : ''}" %>
-          </li>
-        </ul>
+      <!-- タブ切り替え -->
+      <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+          <%= link_to "すべて", users_mypage_path, remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status].blank? ? 'active' : ''}" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "承認待ち (#{@status_counts[:pending]})", users_mypage_path(status: "pending"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'pending' ? 'active' : ''}" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "承認済み (#{@status_counts[:approved]})", users_mypage_path(status: "approved"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'approved' ? 'active' : ''}" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "却下 (#{@status_counts[:rejected]})", users_mypage_path(status: "rejected"), remote: true, data: { turbolinks: false }, class: "nav-link #{params[:status] == 'rejected' ? 'active' : ''}" %>
+        </li>
+      </ul>
 
-        <div id="user-materials-list">
-          <%= render 'public/materials/index', materials: @materials %>
-        </div>
-      </div>
-
-      <!-- 自分の使用・BM一覧 -->
-      <div class="m-5">
-        <h4 class="mb-3 text-white">お気に入り一覧</h4>
-        <!-- ユーザーのお気に入り取得 + N+1問題回避(includes) + Favoriteに関連づいたMaterialの取り出し(map) -->
-        <%= render 'public/materials/index', materials: @user.favorites.includes(:material).map(&:material) %>
-      </div>
-
-      <!-- コメント一覧 -->
-      <div class="m-5">
-        <%= render 'public/comments/mypage_index', comments: @user.comments.includes(:material) %>
+      <div id="user-materials-list">
+        <%= render 'public/materials/index', materials: @materials %>
       </div>
     </div>
+
+    <!-- 自分の使用・BM一覧 -->
+    <div class="m-5">
+      <h4 class="mb-3 text-white">お気に入り一覧</h4>
+      <!-- ユーザーのお気に入り取得 + N+1問題回避(includes) + Favoriteに関連づいたMaterialの取り出し(map) -->
+      <%= render 'public/materials/index', materials: @user.favorites.includes(:material).map(&:material) %>
+    </div>
+
+      <!-- コメント一覧 -->
+    <div class="m-5">
+      <%= render 'public/comments/mypage_index', comments: @user.comments.includes(:material) %>
+    </div>
+  </div>
 </div>

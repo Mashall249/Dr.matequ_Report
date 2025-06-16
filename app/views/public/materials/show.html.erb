@@ -44,7 +44,7 @@
             <% end %>
 
             <!-- コメントボタン -->
-            <%= link_to "コメント/レビューする", new_material_comment_path(@material), class: "btn btn-primary btn-sm" %>
+            <%= link_to "コメント/レビューする", new_material_comment_path(@material), class: "btn btn-outline-primary btn-sm" %>
           </div>
         <% end %>
 
@@ -56,7 +56,7 @@
     </div>
 
     <!-- 特徴・リンク -->
-    <div class="bg-secondary rounded p-3 mb-4 text-light">
+    <div class="border border-info rounded p-3 mb-4 text-dark">
       <h4>特徴</h4>
       <p><%= @material.body %></p>
 

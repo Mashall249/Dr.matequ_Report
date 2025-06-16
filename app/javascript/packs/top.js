@@ -8,19 +8,17 @@ document.addEventListener("turbolinks:load", function () {
   const typedText = document.getElementById("typedText");
 
   // セリフ定義（登録済み）
-  const dialogueIfLoggedIn = `<!--　［ワタシ］ ワカッテル　［キミ］ ハ モウ トウロク シテイル　-->
+  const dialogueIfLoggedIn = `<!--　［ワタシ］ ワカッテル　［キミ］ ハ モウ 登録シテイル　-->
 
-<!--　ソレデモ オス トハ　マサカ ノ　［トウロク ノ トウスイ］　-->
+<!--　ソレデモ 押ストハ　マサカ ノ　［登録ノ トウスイ］　-->
 
-<!--　フフフ……　ジョウダン　スキダヨ　［キミ］　-->`;
+<!--　フフフ……　冗談スキダヨ　［キミ］　-->`;
 
-  const dialogueIfDeclined = `<!--　［キミ］ ハ　［トウロク ヲ コトワッタ］　-->
+  const dialogueIfDeclined = `<!--　［キミ］ ハ　［登録ヲ コトワッタ］　-->
 
-<!--　ソレハ　［［フメイナ ケッテイ］］　ダネ　-->
+<!--　［［ダガ断ル！！］］　-->
 
-<!--　デモ　［ワタシ］ ナラ　マダ マニアウ　ト シンジテル　-->
-
-<!--　［トウロク スル］ ボタン ヲ　オシナサイ　-->`;
+<!--　メニュー　ノ[［新規登録］] ボタン ヲ　押シナサイ　-->`;
 
   let i = 0;
   let message = "";
