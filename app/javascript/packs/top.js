@@ -6,50 +6,89 @@ document.addEventListener("turbolinks:load", function () {
   const card = document.getElementById("registerPromptCard");
   const dialogueContainer = document.getElementById("dialogueContainer");
   const typedText = document.getElementById("typedText");
+  const choices = document.getElementById("dialogueChoices");
+  const backBtn = document.getElementById("backBtn");
+  const retryBtn = document.getElementById("retryBtn");
 
-  // セリフ定義（登録済み）
-  const dialogueIfLoggedIn = `<!--　［ワタシ］ ワカッテル　［キミ］ ハ モウ 登録シテイル　-->
+  // ▼ セリフ定義（配列で複数分）
+  const guestDialogues = [
+    `<!--　［キミ］ ハ　［登録ヲ コトワッタ］　-->
+     <!--　[[ダガ　断ル!!]]　-->
+     <!--　［トウロク スル］ ボタン ヲ　オシナサイ　-->`,
 
-<!--　ソレデモ 押ストハ　マサカ ノ　［登録ノ トウスイ］　-->
+    `<!--　冷ヤカシナラ　コトワルワ　-->
+     <!--　［ワタシ］ ノ ハナシ　ムシ スル ナンテ　ヒドイヨ　-->
+     <!--　コレガ　[[ラストチャンス]]　-->`,
 
-<!--　フフフ……　冗談スキダヨ　［キミ］　-->`;
+    `<!--　帰レ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!　-->`
+  ];
 
-  const dialogueIfDeclined = `<!--　［キミ］ ハ　［登録ヲ コトワッタ］　-->
+  const loggedInDialogues = [
+    `<!--　［ワタシ］ ワカッテル　［キミ］ ハ モウ トウロク シテイル　-->
+     <!--　ナノニ ナゼ オシタノ？　オシャベリガ スキ ナンダネ　-->
+     <!--　フフフ……　ジョウダン　スキダヨ　［キミ］　-->`,
 
-<!--　［［ダガ断ル！！］］　-->
+    `<!--　マタ キタノ　-->
+     <!--　［登録ズミ］ ナノニ　キニ ナッチャウノ？　-->
+     <!--　ホント ハ ［ワタシ］ ノ コト スキナンデショ　-->`
+  ];
 
-<!--　メニュー　ノ[［新規登録］] ボタン ヲ　押シナサイ　-->`;
-
-  let i = 0;
+  let dialogueCounter = 0;
   let message = "";
+  let i = 0;
+
+  function startDialogue(text) {
+    card.style.display = "none";
+    dialogueContainer.style.display = "block";
+    typedText.innerHTML = "";
+    choices.style.display = "none";
+    message = text;
+    i = 0;
+    typeWriter();
+  }
 
   function typeWriter() {
-    if (!typedText) return;
     if (i < message.length) {
       typedText.innerHTML += message[i] === "\n" ? "<br>" : message[i];
       i++;
       setTimeout(typeWriter, 30);
+    } else {
+      choices.style.display = "block";
     }
+  }
+
+  if (registerBtn) {
+    registerBtn.addEventListener("click", function (e) {
+      if (!isLoggedIn) return; // 通常遷移
+      e.preventDefault();
+      dialogueCounter++;
+      const dialogues = loggedInDialogues;
+      const index = Math.min(dialogueCounter - 1, dialogues.length - 1);
+      startDialogue(dialogues[index]);
+    });
   }
 
   if (declineBtn) {
     declineBtn.addEventListener("click", function () {
-      card.style.display = "none";
-      dialogueContainer.style.display = "block";
-      message = dialogueIfDeclined;
-      typedText.innerHTML = "";
-      i = 0;
-      typeWriter();
+      dialogueCounter++;
+      const dialogues = isLoggedIn ? loggedInDialogues : guestDialogues;
+      const index = Math.min(dialogueCounter - 1, dialogues.length - 1);
+      startDialogue(dialogues[index]);
     });
   }
 
-  if (registerBtn && isLoggedIn) {
-    registerBtn.addEventListener("click", function (event) {
-      event.preventDefault();
-      card.style.display = "none";
-      dialogueContainer.style.display = "block";
-      message = dialogueIfLoggedIn;
+  if (backBtn) {
+    backBtn.addEventListener("click", function () {
+      dialogueContainer.style.display = "none";
+      choices.style.display = "none";
+      card.style.display = "block";
+    });
+  }
+
+  if (retryBtn) {
+    retryBtn.addEventListener("click", function () {
       typedText.innerHTML = "";
+      choices.style.display = "none";
       i = 0;
       typeWriter();
     });
