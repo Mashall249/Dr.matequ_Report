@@ -7,9 +7,21 @@ document.addEventListener("turbolinks:load", function () {
 
   window.addEventListener("beforeunload", function () {
     const duration = Math.floor((Date.now() - startTime) / 1000);
-    navigator.sendBeacon("/material_access_logs", JSON.stringify({
-      material_id: materialId,
-      duration: duration
-    }));
+
+    // CSRFトークンを取得
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+    fetch("/access_logs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": token
+      },
+      body: JSON.stringify({
+        material_id: materialId,
+        duration: duration
+      }),
+      keepalive: true  // ← beforeunload でも送信完了を待てる
+    });
   });
 });
