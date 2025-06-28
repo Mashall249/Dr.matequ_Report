@@ -39,7 +39,11 @@ class Material < ApplicationRecord
   end
 
   def get_image(width, height)
-    image.variant(resize: "#{width}x#{height}!").processed
+    if image.attached?
+      image.variant(resize: "#{width}x#{height}!").processed
+    else
+      "no_image.png" # または nil にして呼び出し側で処理
+    end
   end
 
   #Ransack用のモデルコード
