@@ -42,7 +42,7 @@ class Material < ApplicationRecord
     if image.attached?
       image.variant(resize: "#{width}x#{height}!").processed
     else
-      "no_image.png" # または nil にして呼び出し側で処理
+      "no_image.png"
     end
   end
 
