@@ -1,8 +1,10 @@
-<% if @result.present? %>
-  <h3>「<%= @result.join('・') %>」の検索結果</h3>
-  <h5><%= @material.count %> 件</h5>
-  <%= render 'public/materials/index', materials: @material %>
-<% else %>
-  <h3>検索結果</h3>
-  <p>キーワードを入力してください。<p>
-<% end %>
+<div class="container mt-4">
+  <% if @result.present? %>
+    <h1 class="mb-4 text-center">「<%= @result.join('・') %>」の検索結果</h1>
+    <h5><%= @material.count %> 件</h5>
+    <%= render 'public/materials/index', materials: @material %>
+  <% else %>
+    <h1 class="mb-4 text-center">検索結果</h1>
+    <p>キーワードを入力してください。<p>
+  <% end %>
+</div>
