@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_06_13_083742) do
+ActiveRecord::Schema.define(version: 2025_07_01_052546) do
 
   create_table "access_logs", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(version: 2025_06_13_083742) do
     t.float "star", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "good_score", precision: 5, scale: 3
+    t.decimal "bad_score", precision: 5, scale: 3
   end
 
   create_table "favorites", force: :cascade do |t|

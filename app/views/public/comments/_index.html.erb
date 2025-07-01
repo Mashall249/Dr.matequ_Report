@@ -6,7 +6,9 @@
       <h5 class="font-weight-bold mb-2"><%= comment.user.nickname %></h5>
       <div class="comment-star-rating mb-4" data-score="<%= comment.star %>"></div>
       <p class="mb-2"><strong>良い点：</strong> <%= comment.good_comment %></p>
+      <p class="sentiment-score">ボジティブ度：<%= comment.good_score %></p>
       <p class="mb-4"><strong>使いにくい点：</strong> <%= comment.bad_comment %></p>
+      <p class="sentiment-score">ネガティブ度：<%= comment.bad_score %></p>
 
       <!-- 削除/通報/通報済みボタン -->
       <% if user_signed_in? %>

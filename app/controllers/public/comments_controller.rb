@@ -9,8 +9,10 @@ class Public::CommentsController < ApplicationController
   
   def create
     @material = Material.find(params[:material_id])
-    #　↓@comment = current_user.comment.new(comment_params)と同義(10,11)
+    #　↓@comment = current_user.comment.new(comment_params)と同義(下2行)
     @comment = Comment.new(comment_params)
+    @comment.good_score = Language.get_data(comment_params[:good_comment])
+    @comment.bad_score = Language.get_data(comment_params[:bad_comment])
     @comment.user_id = current_user.id
     @comment.material_id = @material.id
     if @comment.save

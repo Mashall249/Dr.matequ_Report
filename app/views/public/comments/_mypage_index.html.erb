@@ -6,7 +6,9 @@
       <h5 class="font-weight-bold mb-2"><%= comment.material.name %></h5>
       <div class="comment-star-rating mb-4" data-score="<%= comment.star %>"></div>
       <p class="mb-2"><strong>良い点：</strong> <%= comment.good_comment %></p>
+      <p class="sentiment-score">ボジティブ度：<%= comment.good_score %></p>
       <p class="mb-4"><strong>使いにくい点：</strong> <%= comment.bad_comment %></p>
+      <p class="sentiment-score">ネガティブ度：<%= comment.bad_score %></p>
 
        <%= link_to "削除する", material_comment_path(comment.material, comment), method: :delete, class: "btn btn-danger btn-sm" %>
     </div>
